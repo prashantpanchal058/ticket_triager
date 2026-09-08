@@ -1,0 +1,401 @@
+subject,body,category,urgency
+Refund status,"Hi team, Can you tell me the current status of my refund? Can you check this for me?",refund,high
+Checkout error,"Hi team, I get an error whenever I try to proceed to checkout. Please help me with this.",technical,medium
+Wrong amount charged,"Hi team, The amount charged to my card is different from the amount shown at checkout. Please let me know what I should do.",billing,medium
+Refund status,"Dear support team, Can you tell me the current status of my refund? Please help me with this.",refund,medium
+Account information incorrect,"Hello, Some of my account information is incorrect and I need to update it. Can you check this for me?",account,low
+Forgot password,"Dear support team, I forgot my password and need help resetting it. I would appreciate your help.",account,high
+Need product information,"Dear support team, I need more information about the product before purchasing. I would appreciate your help.",product,low
+Can't login,"Hi, I am unable to log into my account even though I am entering the correct password. Could you please look into this?",account,medium
+App keeps crashing,"Hello, The mobile app crashes every time I try to open it. Could you please look into this?",technical,medium
+Order history missing,"Hi, Some of my previous orders are missing from my account. Could you please look into this?",orders,medium
+Card was charged twice,"Hi, I was charged twice for the same purchase. Please check and refund the duplicate charge. I would appreciate your help.",billing,medium
+Upgrade subscription,"Dear support team, I would like to upgrade my current subscription plan. Please help me with this.",subscription,low
+Change phone number,"Hello, I need to change the phone number on my account. Please let me know what I should do.",account,high
+Two-factor authentication issue,"Hello support, I am not receiving the verification code for two-factor authentication. Please help me with this.",account,medium
+Cancel my order,"Hello support, I want to cancel my order before it is shipped. Could you please look into this?",orders,low
+Card was charged twice,"Hello support, I was charged twice for the same purchase. Please check and refund the duplicate charge. Could you please look into this?",billing,low
+Error message,"Hello, I keep receiving an error message while using the service. Please help me with this.",technical,low
+Subscription payment failed,"Dear support team, My subscription payment failed and I need help resolving it. Please help me with this.",subscription,medium
+Duplicate payment refund,"Hello support, I was charged twice and need a refund for the duplicate payment. I would appreciate your help.",refund,medium
+Subscription renewal date,"Hi team, Can you tell me when my subscription will renew? Can you check this for me?",subscription,medium
+Change phone number,"Hello support, I need to change the phone number on my account. I would appreciate your help.",account,medium
+Invoice is incorrect,"Hello, The amount shown on my invoice does not match what I expected to pay. I would appreciate your help.",billing,medium
+Upgrade subscription,"Dear support team, I would like to upgrade my current subscription plan. Please let me know what I should do.",subscription,medium
+Page not responding,"Dear support team, The page becomes unresponsive when I try to complete my purchase. Please let me know what I should do.",technical,medium
+Card was charged twice,"Hi team, I was charged twice for the same purchase. Please check and refund the duplicate charge. Could you please look into this?",billing,medium
+Subscription payment failed,"Hi team, My subscription payment failed and I need help resolving it. I would appreciate your help.",subscription,medium
+Need to modify order,"Dear support team, I need to change some details on my recent order. Can you check this for me?",orders,medium
+Refund for cancelled order,"Hi, My order was cancelled but I have not received my refund. Could you please look into this?",refund,medium
+Search not working,"Hi team, The search function is not returning any results. Can you check this for me?",technical,medium
+Order confirmation missing,"Hello, I placed an order but never received an order confirmation. I would appreciate your help.",orders,high
+Free trial ended,"Dear support team, I was charged after my free trial ended and I was not expecting it. Can you check this for me?",subscription,high
+Courier issue,"Hello support, The courier was unable to deliver my package. Could you please look into this?",shipping,high
+Slow website,"Hi team, The website is extremely slow today. Can you check this for me?",technical,medium
+Can't login,"Hi, I am unable to log into my account even though I am entering the correct password. Please let me know what I should do.",account,medium
+Return refund missing,"Hi team, I returned the item but have not received my refund. Please let me know what I should do.",refund,high
+Order quantity incorrect,"Hi team, The order shows a different quantity than what I selected. Please help me with this.",orders,high
+Order history missing,"Hi team, Some of my previous orders are missing from my account. Please help me with this.",orders,high
+Product stopped working,"Hello support, The product stopped working shortly after I received it. Could you please look into this?",product,low
+Package damaged,"Hi team, My package arrived damaged. What should I do? Please let me know what I should do.",shipping,low
+Order confirmation missing,"Hi team, I placed an order but never received an order confirmation. I would appreciate your help.",orders,medium
+Free trial ended,"Dear support team, I was charged after my free trial ended and I was not expecting it. Can you check this for me?",subscription,low
+Account locked,"Hi, My account has been locked and I cannot access it. Please let me know what I should do.",account,medium
+Unable to verify account,"Dear support team, The account verification process keeps failing. Can you check this for me?",account,low
+Invoice is incorrect,"Dear support team, The amount shown on my invoice does not match what I expected to pay. I would appreciate your help.",billing,low
+Two-factor authentication issue,"Hello support, I am not receiving the verification code for two-factor authentication. I would appreciate your help.",account,medium
+Free trial ended,"Dear support team, I was charged after my free trial ended and I was not expecting it. I would appreciate your help.",subscription,high
+Order not showing,"Hi team, I placed an order but it is not appearing in my order history. Please let me know what I should do.",orders,medium
+Package delivered but missing,"Hello support, The tracking says delivered but I have not received the package. I would appreciate your help.",shipping,low
+Payment pending,"Hello support, My payment has been pending for a long time. Can you check its status? Can you check this for me?",billing,medium
+Missing package,"Hi, My shipment appears to be missing and I cannot locate it. Please let me know what I should do.",shipping,low
+Wrong amount charged,"Dear support team, The amount charged to my card is different from the amount shown at checkout. Please let me know what I should do.",billing,medium
+Product description incorrect,"Dear support team, The product does not match the description shown on the website. Please help me with this.",product,low
+Size is incorrect,"Dear support team, The size I received is different from the size I ordered. Can you check this for me?",product,low
+Can't login,"Dear support team, I am unable to log into my account even though I am entering the correct password. Please let me know what I should do.",account,medium
+Subscription charged twice,"Hi, I was charged twice for my subscription this month. Please let me know what I should do.",subscription,high
+Need billing receipt,"Hi, Could you please send me the receipt for my recent purchase? I would appreciate your help.",billing,medium
+Refund to wrong card,"Hi, The refund does not appear to have been sent to my original payment method. Can you check this for me?",refund,high
+Tracking not updating,"Hi team, The tracking information has not been updated for several days. Please help me with this.",shipping,high
+Card was charged twice,"Hello, I was charged twice for the same purchase. Please check and refund the duplicate charge. Can you check this for me?",billing,medium
+Package damaged,"Hello support, My package arrived damaged. What should I do? Please let me know what I should do.",shipping,low
+Order was cancelled,"Dear support team, My order was cancelled unexpectedly. Please explain why. Please let me know what I should do.",orders,high
+Feature not working,"Hi, One of the features is not working as expected. Please let me know what I should do.",technical,high
+Error message,"Hi, I keep receiving an error message while using the service. I would appreciate your help.",technical,low
+Account locked,"Hello, My account has been locked and I cannot access it. Could you please look into this?",account,medium
+Need to modify order,"Hello support, I need to change some details on my recent order. I would appreciate your help.",orders,medium
+Need billing receipt,"Hi team, Could you please send me the receipt for my recent purchase? Can you check this for me?",billing,low
+Subscription charged twice,"Hi team, I was charged twice for my subscription this month. Could you please look into this?",subscription,low
+Website not loading,"Hi team, The website is not loading for me and keeps showing an error. I would appreciate your help.",technical,medium
+Subscription payment failed,"Hello support, My subscription payment failed and I need help resolving it. Please let me know what I should do.",subscription,medium
+Deactivate account,"Hello support, I would like to deactivate my account. Please let me know what I should do.",account,medium
+Wrong product received,"Hello, I received a different product from the one I ordered. Please let me know what I should do.",product,low
+Order status unclear,"Hi, The status of my order has not changed and I am not sure what is happening. I would appreciate your help.",orders,low
+Invoice is incorrect,"Hello, The amount shown on my invoice does not match what I expected to pay. Could you please look into this?",billing,low
+Promo discount missing,"Hi team, The promotional discount was not applied to my order. Please let me know what I should do.",billing,high
+Subscription renewed unexpectedly,"Dear support team, My subscription renewed even though I did not intend to renew it. Can you check this for me?",subscription,medium
+Refund pending,"Dear support team, My refund has been pending for several days. Could you please look into this?",refund,high
+Refund status,"Hello support, Can you tell me the current status of my refund? Please let me know what I should do.",refund,medium
+Subscription renewal date,"Dear support team, Can you tell me when my subscription will renew? Please let me know what I should do.",subscription,low
+Courier issue,"Hello, The courier was unable to deliver my package. Please let me know what I should do.",shipping,low
+Upload failed,"Dear support team, I am unable to upload my file and the upload keeps failing. I would appreciate your help.",technical,high
+Payment failed,"Hello support, My payment was declined while trying to complete my order. Could you please look into this?",billing,medium
+Tax amount is wrong,"Dear support team, The tax amount on my invoice appears to be incorrect. Could you please look into this?",billing,high
+Refund not received,"Hello, My refund was approved but I have not received the money yet. Please help me with this.",refund,medium
+Feature not working,"Dear support team, One of the features is not working as expected. Can you check this for me?",technical,medium
+Slow website,"Hi, The website is extremely slow today. Please let me know what I should do.",technical,medium
+Password reset link not working,"Hello support, The password reset link I received does not work. Please let me know what I should do.",account,high
+Refund amount incorrect,"Hi team, The refund I received is less than the amount I originally paid. Please let me know what I should do.",refund,medium
+Wrong product received,"Hello support, I received a different product from the one I ordered. Can you check this for me?",product,low
+Need to modify order,"Hi team, I need to change some details on my recent order. Please help me with this.",orders,high
+Account information incorrect,"Hi, Some of my account information is incorrect and I need to update it. Please help me with this.",account,medium
+Partial refund,"Hello, I only received part of the refund I was expecting. Please help me with this.",refund,medium
+Product quality issue,"Hello support, The quality of the product is not what I expected. Please let me know what I should do.",product,medium
+Order quantity incorrect,"Hi team, The order shows a different quantity than what I selected. Can you check this for me?",orders,low
+Refund for cancelled order,"Dear support team, My order was cancelled but I have not received my refund. I would appreciate your help.",refund,low
+Package damaged,"Hello, My package arrived damaged. What should I do? I would appreciate your help.",shipping,medium
+Product damaged,"Hi, The product arrived damaged and I would like a replacement. I would appreciate your help.",product,low
+Subscription renewed unexpectedly,"Hello, My subscription renewed even though I did not intend to renew it. Can you check this for me?",subscription,high
+Subscription renewal date,"Hi, Can you tell me when my subscription will renew? Could you please look into this?",subscription,high
+Partial refund,"Hi team, I only received part of the refund I was expecting. Please let me know what I should do.",refund,high
+Deactivate account,"Dear support team, I would like to deactivate my account. Please help me with this.",account,medium
+Return refund missing,"Dear support team, I returned the item but have not received my refund. Can you check this for me?",refund,high
+Order status unclear,"Hi, The status of my order has not changed and I am not sure what is happening. Can you check this for me?",orders,medium
+Need billing receipt,"Hello support, Could you please send me the receipt for my recent purchase? I would appreciate your help.",billing,high
+Unable to verify account,"Hello, The account verification process keeps failing. I would appreciate your help.",account,medium
+Package delivered but missing,"Dear support team, The tracking says delivered but I have not received the package. Please help me with this.",shipping,high
+Unexpected charge,"Hi team, I noticed a charge on my card that I do not recognize. I would appreciate your help.",billing,medium
+Unexpected charge,"Hello, I noticed a charge on my card that I do not recognize. I would appreciate your help.",billing,medium
+Need to modify order,"Hello, I need to change some details on my recent order. Could you please look into this?",orders,high
+Subscription payment failed,"Hi, My subscription payment failed and I need help resolving it. Please help me with this.",subscription,high
+Product unavailable,"Hello support, The product I want is currently unavailable. Do you know when it will be back? Can you check this for me?",product,medium
+Need to modify order,"Hello support, I need to change some details on my recent order. Please help me with this.",orders,high
+Cancel subscription,"Hi team, I want to cancel my current subscription. I would appreciate your help.",subscription,medium
+Page not responding,"Hello, The page becomes unresponsive when I try to complete my purchase. Can you check this for me?",technical,high
+Subscription renewed unexpectedly,"Hello, My subscription renewed even though I did not intend to renew it. Please let me know what I should do.",subscription,medium
+Website not loading,"Dear support team, The website is not loading for me and keeps showing an error. I would appreciate your help.",technical,high
+Unable to verify account,"Hi team, The account verification process keeps failing. Please let me know what I should do.",account,high
+Change email address,"Hi team, I want to update the email address associated with my account. Please help me with this.",account,high
+App keeps crashing,"Hi team, The mobile app crashes every time I try to open it. Please let me know what I should do.",technical,medium
+Need product information,"Hi, I need more information about the product before purchasing. I would appreciate your help.",product,medium
+Search not working,"Hi, The search function is not returning any results. Can you check this for me?",technical,medium
+Package damaged,"Hello, My package arrived damaged. What should I do? I would appreciate your help.",shipping,high
+Cancel my order,"Hello support, I want to cancel my order before it is shipped. Can you check this for me?",orders,medium
+Wrong amount charged,"Hi team, The amount charged to my card is different from the amount shown at checkout. Please help me with this.",billing,high
+Product stopped working,"Hi, The product stopped working shortly after I received it. Could you please look into this?",product,medium
+Need billing receipt,"Hi team, Could you please send me the receipt for my recent purchase? Could you please look into this?",billing,high
+Package delivered but missing,"Hi team, The tracking says delivered but I have not received the package. Can you check this for me?",shipping,high
+Subscription renewed unexpectedly,"Hello support, My subscription renewed even though I did not intend to renew it. Please let me know what I should do.",subscription,high
+Need product information,"Hello support, I need more information about the product before purchasing. Please let me know what I should do.",product,high
+Tracking number invalid,"Hi team, The tracking number provided does not show any information. Can you check this for me?",shipping,medium
+Refund for cancelled order,"Hello, My order was cancelled but I have not received my refund. Please let me know what I should do.",refund,high
+Product description incorrect,"Hello support, The product does not match the description shown on the website. Can you check this for me?",product,medium
+Duplicate order,"Hello, It looks like my order was submitted twice. Please help me with this.",orders,low
+Checkout error,"Hi, I get an error whenever I try to proceed to checkout. Please let me know what I should do.",technical,medium
+Tracking number invalid,"Hi team, The tracking number provided does not show any information. Could you please look into this?",shipping,medium
+Wrong item ordered,"Hello, I accidentally ordered the wrong item and would like to change it. Please let me know what I should do.",orders,high
+Delivery date changed,"Dear support team, The estimated delivery date keeps changing. Can you check this for me?",shipping,medium
+Refund status,"Hello, Can you tell me the current status of my refund? Please help me with this.",refund,high
+Feature not working,"Hi, One of the features is not working as expected. Please let me know what I should do.",technical,high
+Partial refund,"Hello support, I only received part of the refund I was expecting. I would appreciate your help.",refund,high
+Product description incorrect,"Hi team, The product does not match the description shown on the website. Can you check this for me?",product,low
+Payment pending,"Dear support team, My payment has been pending for a long time. Can you check its status? Could you please look into this?",billing,low
+Order status unclear,"Hello, The status of my order has not changed and I am not sure what is happening. Could you please look into this?",orders,high
+Upload failed,"Hello, I am unable to upload my file and the upload keeps failing. Please help me with this.",technical,medium
+Tracking not updating,"Hello support, The tracking information has not been updated for several days. Please let me know what I should do.",shipping,low
+Shipping delay,"Hi team, There is a delay with my shipment and I need an update. Could you please look into this?",shipping,high
+Error message,"Hi team, I keep receiving an error message while using the service. Could you please look into this?",technical,high
+Account locked,"Hello, My account has been locked and I cannot access it. Could you please look into this?",account,low
+Need to modify order,"Hi team, I need to change some details on my recent order. Please let me know what I should do.",orders,medium
+Package damaged,"Dear support team, My package arrived damaged. What should I do? Can you check this for me?",shipping,high
+Subscription payment failed,"Hi team, My subscription payment failed and I need help resolving it. I would appreciate your help.",subscription,medium
+Need billing receipt,"Hi team, Could you please send me the receipt for my recent purchase? Please help me with this.",billing,low
+Product description incorrect,"Hello, The product does not match the description shown on the website. Please let me know what I should do.",product,high
+Feature not working,"Hello support, One of the features is not working as expected. Please help me with this.",technical,high
+Wrong delivery address,"Hello support, My package is being sent to the wrong address. I would appreciate your help.",shipping,low
+Wrong amount charged,"Hi team, The amount charged to my card is different from the amount shown at checkout. Please help me with this.",billing,low
+Tracking not updating,"Hi team, The tracking information has not been updated for several days. Please help me with this.",shipping,high
+Cancel my order,"Hi, I want to cancel my order before it is shipped. Please let me know what I should do.",orders,low
+Password reset link not working,"Dear support team, The password reset link I received does not work. Could you please look into this?",account,medium
+Product damaged,"Hi, The product arrived damaged and I would like a replacement. Could you please look into this?",product,low
+Cancel subscription,"Hi, I want to cancel my current subscription. I would appreciate your help.",subscription,medium
+Downgrade subscription,"Hello support, I want to downgrade my subscription to a cheaper plan. I would appreciate your help.",subscription,medium
+Return refund missing,"Hello, I returned the item but have not received my refund. I would appreciate your help.",refund,high
+Website not loading,"Hi team, The website is not loading for me and keeps showing an error. Could you please look into this?",technical,high
+Missing package,"Hello support, My shipment appears to be missing and I cannot locate it. Please help me with this.",shipping,low
+Subscription not activated,"Hi team, I paid for a subscription but it has not been activated. Can you check this for me?",subscription,medium
+Change phone number,"Hi team, I need to change the phone number on my account. Can you check this for me?",account,high
+Subscription benefits missing,"Hello support, Some benefits included in my subscription are not available. I would appreciate your help.",subscription,high
+Wrong delivery address,"Hello, My package is being sent to the wrong address. Please help me with this.",shipping,high
+Order not showing,"Hello, I placed an order but it is not appearing in my order history. Please let me know what I should do.",orders,high
+Partial refund,"Hi team, I only received part of the refund I was expecting. Could you please look into this?",refund,high
+Change phone number,"Hi team, I need to change the phone number on my account. Could you please look into this?",account,high
+Deactivate account,"Hi, I would like to deactivate my account. I would appreciate your help.",account,low
+Order history missing,"Hello, Some of my previous orders are missing from my account. Please let me know what I should do.",orders,medium
+Two-factor authentication issue,"Hello, I am not receiving the verification code for two-factor authentication. Could you please look into this?",account,high
+Order confirmation missing,"Hello support, I placed an order but never received an order confirmation. Could you please look into this?",orders,low
+Wrong product received,"Hi team, I received a different product from the one I ordered. Can you check this for me?",product,low
+Can't login,"Hi team, I am unable to log into my account even though I am entering the correct password. Please help me with this.",account,medium
+Refund to wrong card,"Hello support, The refund does not appear to have been sent to my original payment method. I would appreciate your help.",refund,medium
+Account locked,"Hello support, My account has been locked and I cannot access it. Please help me with this.",account,medium
+Wrong amount charged,"Hello, The amount charged to my card is different from the amount shown at checkout. Please let me know what I should do.",billing,high
+Unexpected charge,"Hello support, I noticed a charge on my card that I do not recognize. Can you check this for me?",billing,high
+Cancel my order,"Hello, I want to cancel my order before it is shipped. I would appreciate your help.",orders,low
+Order status unclear,"Hello, The status of my order has not changed and I am not sure what is happening. Can you check this for me?",orders,high
+Shipping delay,"Hi team, There is a delay with my shipment and I need an update. Can you check this for me?",shipping,medium
+Unable to verify account,"Hello, The account verification process keeps failing. Could you please look into this?",account,low
+Shipping delay,"Hi, There is a delay with my shipment and I need an update. Can you check this for me?",shipping,medium
+Product unavailable,"Hello, The product I want is currently unavailable. Do you know when it will be back? Please let me know what I should do.",product,low
+Refund amount incorrect,"Hi, The refund I received is less than the amount I originally paid. Could you please look into this?",refund,medium
+Product unavailable,"Hello support, The product I want is currently unavailable. Do you know when it will be back? Can you check this for me?",product,medium
+Tracking number invalid,"Hi, The tracking number provided does not show any information. Could you please look into this?",shipping,medium
+Wrong item ordered,"Hi team, I accidentally ordered the wrong item and would like to change it. Can you check this for me?",orders,medium
+Order confirmation missing,"Hello, I placed an order but never received an order confirmation. Can you check this for me?",orders,low
+Cancel subscription,"Hello support, I want to cancel my current subscription. Can you check this for me?",subscription,medium
+Change email address,"Hello support, I want to update the email address associated with my account. I would appreciate your help.",account,medium
+Wrong product received,"Hi, I received a different product from the one I ordered. Please help me with this.",product,low
+Product description incorrect,"Hi, The product does not match the description shown on the website. I would appreciate your help.",product,high
+Need product information,"Hi team, I need more information about the product before purchasing. Could you please look into this?",product,low
+Subscription renewal date,"Hi, Can you tell me when my subscription will renew? Could you please look into this?",subscription,medium
+Wrong product received,"Hello, I received a different product from the one I ordered. I would appreciate your help.",product,medium
+Product damaged,"Hello, The product arrived damaged and I would like a replacement. I would appreciate your help.",product,high
+Shipping delay,"Hi, There is a delay with my shipment and I need an update. Can you check this for me?",shipping,high
+Request a refund,"Hello, I would like to request a refund for my recent purchase. Please help me with this.",refund,high
+Error message,"Hi team, I keep receiving an error message while using the service. Could you please look into this?",technical,high
+Refund pending,"Hi team, My refund has been pending for several days. Please help me with this.",refund,high
+Website not loading,"Hello, The website is not loading for me and keeps showing an error. I would appreciate your help.",technical,high
+Order history missing,"Hello, Some of my previous orders are missing from my account. Please let me know what I should do.",orders,medium
+Promo discount missing,"Dear support team, The promotional discount was not applied to my order. I would appreciate your help.",billing,medium
+Need billing receipt,"Hi, Could you please send me the receipt for my recent purchase? Please let me know what I should do.",billing,low
+Need product information,"Hello, I need more information about the product before purchasing. Please let me know what I should do.",product,low
+Delivery date changed,"Hello support, The estimated delivery date keeps changing. Please let me know what I should do.",shipping,high
+Return refund missing,"Dear support team, I returned the item but have not received my refund. Can you check this for me?",refund,medium
+Order history missing,"Hi, Some of my previous orders are missing from my account. Please let me know what I should do.",orders,high
+Delivery date changed,"Dear support team, The estimated delivery date keeps changing. Please let me know what I should do.",shipping,high
+Product damaged,"Hello support, The product arrived damaged and I would like a replacement. I would appreciate your help.",product,low
+Feature not working,"Hi, One of the features is not working as expected. Could you please look into this?",technical,low
+Order status unclear,"Hi team, The status of my order has not changed and I am not sure what is happening. Please let me know what I should do.",orders,high
+Cancel subscription,"Hi, I want to cancel my current subscription. I would appreciate your help.",subscription,low
+Search not working,"Hello, The search function is not returning any results. I would appreciate your help.",technical,medium
+Free trial ended,"Hi team, I was charged after my free trial ended and I was not expecting it. I would appreciate your help.",subscription,low
+App keeps crashing,"Hi team, The mobile app crashes every time I try to open it. Please let me know what I should do.",technical,medium
+Cancel subscription,"Hi team, I want to cancel my current subscription. Could you please look into this?",subscription,high
+Tracking number invalid,"Hello, The tracking number provided does not show any information. I would appreciate your help.",shipping,high
+App login issue,"Hello, I cannot log into the mobile app even though the website works. I would appreciate your help.",technical,low
+Order quantity incorrect,"Dear support team, The order shows a different quantity than what I selected. Can you check this for me?",orders,low
+Missing package,"Dear support team, My shipment appears to be missing and I cannot locate it. Please help me with this.",shipping,high
+Shipping delay,"Hello, There is a delay with my shipment and I need an update. Please help me with this.",shipping,high
+Shipping delay,"Dear support team, There is a delay with my shipment and I need an update. Could you please look into this?",shipping,medium
+Subscription benefits missing,"Hi, Some benefits included in my subscription are not available. Please let me know what I should do.",subscription,high
+Card was charged twice,"Hello, I was charged twice for the same purchase. Please check and refund the duplicate charge. Please help me with this.",billing,low
+Refund status,"Hello support, Can you tell me the current status of my refund? Could you please look into this?",refund,medium
+Order confirmation missing,"Hello, I placed an order but never received an order confirmation. Please help me with this.",orders,medium
+Duplicate payment refund,"Hi team, I was charged twice and need a refund for the duplicate payment. Please help me with this.",refund,medium
+Partial refund,"Dear support team, I only received part of the refund I was expecting. Please let me know what I should do.",refund,medium
+Tax amount is wrong,"Dear support team, The tax amount on my invoice appears to be incorrect. Please let me know what I should do.",billing,medium
+Wrong item ordered,"Dear support team, I accidentally ordered the wrong item and would like to change it. I would appreciate your help.",orders,high
+Subscription renewal date,"Hello, Can you tell me when my subscription will renew? I would appreciate your help.",subscription,low
+Refund not received,"Hi team, My refund was approved but I have not received the money yet. Can you check this for me?",refund,high
+Free trial ended,"Hi team, I was charged after my free trial ended and I was not expecting it. Please help me with this.",subscription,high
+Subscription not activated,"Hello support, I paid for a subscription but it has not been activated. Please help me with this.",subscription,high
+Subscription charged twice,"Hello support, I was charged twice for my subscription this month. Please help me with this.",subscription,medium
+Subscription payment failed,"Hello support, My subscription payment failed and I need help resolving it. Could you please look into this?",subscription,medium
+Order status unclear,"Hello support, The status of my order has not changed and I am not sure what is happening. Could you please look into this?",orders,high
+Password reset link not working,"Hello support, The password reset link I received does not work. Can you check this for me?",account,low
+Product compatibility,"Hello support, Can you confirm whether this product is compatible with my device? Can you check this for me?",product,low
+Unexpected charge,"Hello, I noticed a charge on my card that I do not recognize. Can you check this for me?",billing,high
+Password reset link not working,"Hi team, The password reset link I received does not work. I would appreciate your help.",account,high
+Subscription benefits missing,"Hello, Some benefits included in my subscription are not available. Can you check this for me?",subscription,low
+Cancel my order,"Hi team, I want to cancel my order before it is shipped. Can you check this for me?",orders,medium
+Duplicate payment refund,"Hi team, I was charged twice and need a refund for the duplicate payment. Please help me with this.",refund,low
+Upload failed,"Hello support, I am unable to upload my file and the upload keeps failing. Please let me know what I should do.",technical,medium
+Duplicate order,"Hi, It looks like my order was submitted twice. Can you check this for me?",orders,low
+Refund amount incorrect,"Hi team, The refund I received is less than the amount I originally paid. Can you check this for me?",refund,high
+Wrong delivery address,"Hello support, My package is being sent to the wrong address. Please let me know what I should do.",shipping,medium
+Page not responding,"Hello, The page becomes unresponsive when I try to complete my purchase. I would appreciate your help.",technical,medium
+Promo discount missing,"Hello, The promotional discount was not applied to my order. Could you please look into this?",billing,low
+Subscription renewed unexpectedly,"Hi, My subscription renewed even though I did not intend to renew it. Please let me know what I should do.",subscription,low
+Can't login,"Hello, I am unable to log into my account even though I am entering the correct password. Please help me with this.",account,high
+Deactivate account,"Hi, I would like to deactivate my account. Can you check this for me?",account,low
+Refund not received,"Hello, My refund was approved but I have not received the money yet. Please help me with this.",refund,low
+Delivery date changed,"Hi, The estimated delivery date keeps changing. Please help me with this.",shipping,low
+Shipping delay,"Hello, There is a delay with my shipment and I need an update. Please help me with this.",shipping,medium
+Card was charged twice,"Hi team, I was charged twice for the same purchase. Please check and refund the duplicate charge. Can you check this for me?",billing,low
+Promo discount missing,"Dear support team, The promotional discount was not applied to my order. Please help me with this.",billing,high
+Need billing receipt,"Hi, Could you please send me the receipt for my recent purchase? Please help me with this.",billing,medium
+Tracking number invalid,"Dear support team, The tracking number provided does not show any information. Please help me with this.",shipping,medium
+Duplicate order,"Hello support, It looks like my order was submitted twice. Could you please look into this?",orders,medium
+Product description incorrect,"Hello support, The product does not match the description shown on the website. I would appreciate your help.",product,low
+Checkout error,"Hello, I get an error whenever I try to proceed to checkout. Can you check this for me?",technical,high
+Refund to wrong card,"Hello, The refund does not appear to have been sent to my original payment method. I would appreciate your help.",refund,medium
+Two-factor authentication issue,"Hi team, I am not receiving the verification code for two-factor authentication. Can you check this for me?",account,medium
+Can't login,"Hi, I am unable to log into my account even though I am entering the correct password. Can you check this for me?",account,medium
+Refund to wrong card,"Hi, The refund does not appear to have been sent to my original payment method. Can you check this for me?",refund,medium
+Checkout error,"Hi, I get an error whenever I try to proceed to checkout. Please let me know what I should do.",technical,high
+Need product information,"Hello, I need more information about the product before purchasing. Can you check this for me?",product,low
+Tracking not updating,"Hello, The tracking information has not been updated for several days. Could you please look into this?",shipping,medium
+Tax amount is wrong,"Hi, The tax amount on my invoice appears to be incorrect. Please let me know what I should do.",billing,medium
+Product missing parts,"Hi, The product I received is missing some parts. Please help me with this.",product,low
+Request a refund,"Hello, I would like to request a refund for my recent purchase. Can you check this for me?",refund,low
+Error message,"Dear support team, I keep receiving an error message while using the service. Please let me know what I should do.",technical,high
+Wrong product received,"Dear support team, I received a different product from the one I ordered. Could you please look into this?",product,low
+Promo discount missing,"Hi, The promotional discount was not applied to my order. Can you check this for me?",billing,low
+Slow website,"Hello, The website is extremely slow today. Could you please look into this?",technical,low
+Upgrade subscription,"Hi, I would like to upgrade my current subscription plan. I would appreciate your help.",subscription,high
+Wrong item ordered,"Hello support, I accidentally ordered the wrong item and would like to change it. Could you please look into this?",orders,high
+Refund status,"Hi, Can you tell me the current status of my refund? I would appreciate your help.",refund,low
+Product stopped working,"Hi team, The product stopped working shortly after I received it. Please help me with this.",product,medium
+Request a refund,"Hi, I would like to request a refund for my recent purchase. Please let me know what I should do.",refund,high
+Package damaged,"Hello, My package arrived damaged. What should I do? I would appreciate your help.",shipping,high
+Change phone number,"Hello support, I need to change the phone number on my account. Please help me with this.",account,high
+Refund not received,"Hi team, My refund was approved but I have not received the money yet. I would appreciate your help.",refund,high
+Account locked,"Hello, My account has been locked and I cannot access it. Can you check this for me?",account,medium
+Card was charged twice,"Hello support, I was charged twice for the same purchase. Please check and refund the duplicate charge. Please help me with this.",billing,high
+Payment failed,"Dear support team, My payment was declined while trying to complete my order. I would appreciate your help.",billing,medium
+Feature not working,"Hi, One of the features is not working as expected. I would appreciate your help.",technical,medium
+Refund not received,"Hi team, My refund was approved but I have not received the money yet. Please let me know what I should do.",refund,low
+Downgrade subscription,"Hello, I want to downgrade my subscription to a cheaper plan. Please let me know what I should do.",subscription,low
+Wrong amount charged,"Hello support, The amount charged to my card is different from the amount shown at checkout. Can you check this for me?",billing,high
+Product missing parts,"Dear support team, The product I received is missing some parts. Could you please look into this?",product,low
+Refund to wrong card,"Hello, The refund does not appear to have been sent to my original payment method. I would appreciate your help.",refund,medium
+Page not responding,"Hello support, The page becomes unresponsive when I try to complete my purchase. Please help me with this.",technical,low
+Page not responding,"Hello support, The page becomes unresponsive when I try to complete my purchase. Can you check this for me?",technical,high
+Wrong delivery address,"Dear support team, My package is being sent to the wrong address. Could you please look into this?",shipping,medium
+Subscription charged twice,"Hi, I was charged twice for my subscription this month. Please let me know what I should do.",subscription,medium
+Order was cancelled,"Hi team, My order was cancelled unexpectedly. Please explain why. Could you please look into this?",orders,low
+Password reset link not working,"Dear support team, The password reset link I received does not work. Please help me with this.",account,medium
+Order was cancelled,"Dear support team, My order was cancelled unexpectedly. Please explain why. Can you check this for me?",orders,high
+Order not showing,"Hello support, I placed an order but it is not appearing in my order history. Please let me know what I should do.",orders,medium
+Unexpected charge,"Hi team, I noticed a charge on my card that I do not recognize. Please help me with this.",billing,high
+Account information incorrect,"Hello support, Some of my account information is incorrect and I need to update it. Please let me know what I should do.",account,high
+Product unavailable,"Hi team, The product I want is currently unavailable. Do you know when it will be back? Please let me know what I should do.",product,low
+Payment failed,"Hi team, My payment was declined while trying to complete my order. Please help me with this.",billing,high
+Package delivered but missing,"Hi team, The tracking says delivered but I have not received the package. Please let me know what I should do.",shipping,medium
+Payment pending,"Hi, My payment has been pending for a long time. Can you check its status? Could you please look into this?",billing,high
+Upgrade subscription,"Dear support team, I would like to upgrade my current subscription plan. I would appreciate your help.",subscription,high
+Product unavailable,"Hi team, The product I want is currently unavailable. Do you know when it will be back? Please let me know what I should do.",product,low
+Refund to wrong card,"Hello support, The refund does not appear to have been sent to my original payment method. I would appreciate your help.",refund,medium
+Error message,"Dear support team, I keep receiving an error message while using the service. I would appreciate your help.",technical,low
+Product stopped working,"Dear support team, The product stopped working shortly after I received it. Please help me with this.",product,low
+Refund to wrong card,"Hi, The refund does not appear to have been sent to my original payment method. Could you please look into this?",refund,high
+Refund status,"Hello support, Can you tell me the current status of my refund? Can you check this for me?",refund,low
+Refund amount incorrect,"Hello support, The refund I received is less than the amount I originally paid. Can you check this for me?",refund,high
+Upload failed,"Dear support team, I am unable to upload my file and the upload keeps failing. Please let me know what I should do.",technical,medium
+Subscription renewed unexpectedly,"Hello, My subscription renewed even though I did not intend to renew it. Please let me know what I should do.",subscription,medium
+Slow website,"Hello, The website is extremely slow today. Can you check this for me?",technical,high
+Subscription benefits missing,"Hello, Some benefits included in my subscription are not available. Can you check this for me?",subscription,medium
+Subscription payment failed,"Hello, My subscription payment failed and I need help resolving it. Can you check this for me?",subscription,high
+Size is incorrect,"Dear support team, The size I received is different from the size I ordered. Could you please look into this?",product,high
+Search not working,"Hello support, The search function is not returning any results. Can you check this for me?",technical,high
+Refund to wrong card,"Hi team, The refund does not appear to have been sent to my original payment method. Could you please look into this?",refund,high
+Tracking not updating,"Hi, The tracking information has not been updated for several days. Could you please look into this?",shipping,medium
+Need billing receipt,"Hello support, Could you please send me the receipt for my recent purchase? I would appreciate your help.",billing,low
+Refund status,"Hello, Can you tell me the current status of my refund? Please help me with this.",refund,high
+Courier issue,"Hi team, The courier was unable to deliver my package. Please let me know what I should do.",shipping,medium
+Product missing parts,"Hello, The product I received is missing some parts. Please help me with this.",product,low
+App keeps crashing,"Hello, The mobile app crashes every time I try to open it. Please help me with this.",technical,high
+Order status unclear,"Hello support, The status of my order has not changed and I am not sure what is happening. Please help me with this.",orders,high
+Two-factor authentication issue,"Dear support team, I am not receiving the verification code for two-factor authentication. Can you check this for me?",account,high
+Invoice is incorrect,"Hi, The amount shown on my invoice does not match what I expected to pay. Can you check this for me?",billing,high
+Invoice is incorrect,"Hello support, The amount shown on my invoice does not match what I expected to pay. Please help me with this.",billing,low
+Can't login,"Dear support team, I am unable to log into my account even though I am entering the correct password. Can you check this for me?",account,high
+Refund status,"Hi, Can you tell me the current status of my refund? Could you please look into this?",refund,medium
+Unexpected charge,"Hi, I noticed a charge on my card that I do not recognize. I would appreciate your help.",billing,medium
+Search not working,"Hello, The search function is not returning any results. Can you check this for me?",technical,medium
+Unable to verify account,"Hi, The account verification process keeps failing. Please help me with this.",account,medium
+Size is incorrect,"Hi, The size I received is different from the size I ordered. Please let me know what I should do.",product,medium
+Account locked,"Hello, My account has been locked and I cannot access it. Could you please look into this?",account,medium
+Product stopped working,"Hello, The product stopped working shortly after I received it. Can you check this for me?",product,medium
+Website not loading,"Hi, The website is not loading for me and keeps showing an error. Could you please look into this?",technical,high
+Refund pending,"Hi team, My refund has been pending for several days. Can you check this for me?",refund,high
+Wrong amount charged,"Hello support, The amount charged to my card is different from the amount shown at checkout. Please help me with this.",billing,low
+Product damaged,"Dear support team, The product arrived damaged and I would like a replacement. I would appreciate your help.",product,medium
+Change email address,"Dear support team, I want to update the email address associated with my account. Could you please look into this?",account,medium
+Page not responding,"Hello, The page becomes unresponsive when I try to complete my purchase. I would appreciate your help.",technical,high
+Tracking not updating,"Hi team, The tracking information has not been updated for several days. Please help me with this.",shipping,high
+Product stopped working,"Dear support team, The product stopped working shortly after I received it. I would appreciate your help.",product,low
+Subscription renewed unexpectedly,"Hi, My subscription renewed even though I did not intend to renew it. Can you check this for me?",subscription,medium
+Order confirmation missing,"Hello, I placed an order but never received an order confirmation. Could you please look into this?",orders,medium
+Product missing parts,"Hello, The product I received is missing some parts. Could you please look into this?",product,high
+Subscription not activated,"Hello, I paid for a subscription but it has not been activated. Please help me with this.",subscription,high
+Product unavailable,"Hello, The product I want is currently unavailable. Do you know when it will be back? Can you check this for me?",product,medium
+Refund pending,"Hello, My refund has been pending for several days. Please help me with this.",refund,medium
+Account information incorrect,"Hello, Some of my account information is incorrect and I need to update it. Please let me know what I should do.",account,high
+Password reset link not working,"Hello support, The password reset link I received does not work. Please help me with this.",account,medium
+Package damaged,"Hello support, My package arrived damaged. What should I do? Please let me know what I should do.",shipping,low
+Courier issue,"Hi team, The courier was unable to deliver my package. Please let me know what I should do.",shipping,high
+Subscription charged twice,"Hi team, I was charged twice for my subscription this month. Can you check this for me?",subscription,low
+Shipping delay,"Hello, There is a delay with my shipment and I need an update. Could you please look into this?",shipping,high
+Tracking number invalid,"Hi, The tracking number provided does not show any information. I would appreciate your help.",shipping,high
+Change phone number,"Hello support, I need to change the phone number on my account. Could you please look into this?",account,medium
+Wrong amount charged,"Dear support team, The amount charged to my card is different from the amount shown at checkout. Can you check this for me?",billing,medium
+Size is incorrect,"Hi, The size I received is different from the size I ordered. I would appreciate your help.",product,medium
+Return refund missing,"Hi, I returned the item but have not received my refund. Can you check this for me?",refund,low
+Slow website,"Hi team, The website is extremely slow today. Can you check this for me?",technical,medium
+Invoice is incorrect,"Hi team, The amount shown on my invoice does not match what I expected to pay. Please let me know what I should do.",billing,medium
+Product stopped working,"Hello support, The product stopped working shortly after I received it. I would appreciate your help.",product,medium
+Courier issue,"Hi team, The courier was unable to deliver my package. Could you please look into this?",shipping,medium
+Slow website,"Dear support team, The website is extremely slow today. I would appreciate your help.",technical,medium
+Shipping delay,"Hi team, There is a delay with my shipment and I need an update. Could you please look into this?",shipping,medium
+Upload failed,"Hello, I am unable to upload my file and the upload keeps failing. Please help me with this.",technical,medium
+Product compatibility,"Hi, Can you confirm whether this product is compatible with my device? I would appreciate your help.",product,medium
+Slow website,"Hello support, The website is extremely slow today. Can you check this for me?",technical,medium
+Product description incorrect,"Hello, The product does not match the description shown on the website. I would appreciate your help.",product,low
+Need to modify order,"Dear support team, I need to change some details on my recent order. Can you check this for me?",orders,high
+Order history missing,"Hello, Some of my previous orders are missing from my account. Please let me know what I should do.",orders,high
+Missing package,"Hi, My shipment appears to be missing and I cannot locate it. Please let me know what I should do.",shipping,low
+Subscription charged twice,"Hi team, I was charged twice for my subscription this month. Can you check this for me?",subscription,medium
+Change phone number,"Hello, I need to change the phone number on my account. Can you check this for me?",account,low
+Free trial ended,"Hi, I was charged after my free trial ended and I was not expecting it. Please let me know what I should do.",subscription,medium
+Password reset link not working,"Dear support team, The password reset link I received does not work. Could you please look into this?",account,medium
+Product compatibility,"Dear support team, Can you confirm whether this product is compatible with my device? Please let me know what I should do.",product,low
+Refund to wrong card,"Hello, The refund does not appear to have been sent to my original payment method. I would appreciate your help.",refund,low
+Need to modify order,"Hi, I need to change some details on my recent order. I would appreciate your help.",orders,high
+Subscription renewed unexpectedly,"Hello, My subscription renewed even though I did not intend to renew it. I would appreciate your help.",subscription,high
+Promo discount missing,"Hi team, The promotional discount was not applied to my order. Please help me with this.",billing,high
+Shipping delay,"Hi team, There is a delay with my shipment and I need an update. Please let me know what I should do.",shipping,high
+Two-factor authentication issue,"Hello support, I am not receiving the verification code for two-factor authentication. Please help me with this.",account,low
+Order confirmation missing,"Hi team, I placed an order but never received an order confirmation. I would appreciate your help.",orders,low
+Search not working,"Hello support, The search function is not returning any results. Could you please look into this?",technical,high
+Product quality issue,"Hi team, The quality of the product is not what I expected. I would appreciate your help.",product,medium
+Need to modify order,"Hi team, I need to change some details on my recent order. Could you please look into this?",orders,high

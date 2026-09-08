@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ ticket.subject }}
+{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'ticket_list' %}" class="text-decoration-none text-muted small d-inline-flex align-items-center mb-3">
+    <i class="bi bi-arrow-left me-1"></i> Back to list
+</a>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+
+        <!-- Ticket Info Card -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h2 class="fw-bold mb-0 fs-4">{{ ticket.subject }}</h2>
+                    <span class="badge status-{{ ticket.status|lower }}">{{ ticket.get_status_display }}</span>
+                </div>
+
+                <div class="d-flex gap-3 mb-3 flex-wrap">
+                    {% if ticket.category %}
+                        <span class="badge badge-soft">{{ ticket.get_category_display }}</span>
+                    {% endif %}
+                    {% if ticket.urgency %}
+                        <span class="badge urgency-{{ ticket.urgency|lower }}">{{ ticket.get_urgency_display }}</span>
+                    {% endif %}
+                </div>
+
+                <hr class="my-3">
+
+                <div class="mb-3">
+                    <div class="text-muted small fw-semibold mb-1">
+                        <i class="bi bi-person-fill me-1"></i> From
+                    </div>
+                    <div>{{ ticket.submitted_by }}</div>
+                </div>
+
+                <div class="mb-2">
+                    <div class="text-muted small fw-semibold mb-1">
+                        <i class="bi bi-file-text-fill me-1"></i> Description
+                    </div>
+                    <div class="ticket-body">{{ ticket.body|linebreaks }}</div>
+                </div>
+
+                <div class="text-muted mt-3" style="font-size: 0.75rem;">
+                    <i class="bi bi-clock me-1"></i> Created {{ ticket.created_at|date:"M d, Y H:i" }}
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Agent Review Card -->
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body p-4">
+
+                <h3 class="fw-bold fs-5 mb-3">
+                    <i class="bi bi-clipboard-check me-1"></i> Agent Review
+                </h3>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.category.id_for_label }}" class="form-label small fw-semibold mb-1">Category</label>
+                            {{ form.category }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.urgency.id_for_label }}" class="form-label small fw-semibold mb-1">Urgency</label>
+                            {{ form.urgency }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.status.id_for_label }}" class="form-label small fw-semibold mb-1">Status</label>
+                            {{ form.status }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.assigned_agent.id_for_label }}" class="form-label small fw-semibold mb-1">Assigned Agent</label>
+                            {{ form.assigned_agent }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold rounded-3">
+                        <i class="bi bi-check-lg me-1"></i> Save
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .form-select {
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.9rem;
+        border: 1px solid #dcdfe4;
+    }
+
+    .form-select:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.15);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4f46e5, #6366f1);
+        border: none;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+    }
+
+    .ticket-body {
+        white-space: pre-wrap;
+        line-height: 1.6;
+    }
+
+    .badge-soft {
+        background: #eef2ff;
+        color: #4f46e5;
+        font-weight: 500;
+        padding: 0.4em 0.75em;
+    }
+
+    .urgency-low { background: #ecfdf5; color: #059669; font-weight: 500; padding: 0.4em 0.75em; }
+    .urgency-medium { background: #fffbeb; color: #d97706; font-weight: 500; padding: 0.4em 0.75em; }
+    .urgency-high { background: #fef2f2; color: #dc2626; font-weight: 500; padding: 0.4em 0.75em; }
+    .urgency-critical { background: #450a0a; color: #fff; font-weight: 500; padding: 0.4em 0.75em; }
+
+    .status-open { background: #eff6ff; color: #2563eb; font-weight: 500; padding: 0.4em 0.75em; }
+    .status-in_progress { background: #fffbeb; color: #d97706; font-weight: 500; padding: 0.4em 0.75em; }
+    .status-resolved { background: #ecfdf5; color: #059669; font-weight: 500; padding: 0.4em 0.75em; }
+    .status-closed { background: #f3f4f6; color: #6b7280; font-weight: 500; padding: 0.4em 0.75em; }
+</style>
+
+{% endblock %}

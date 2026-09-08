@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-5 col-lg-4">
+
+        <div class="card border-0 shadow-lg rounded-4 auth-card">
+            <div class="card-body p-4">
+
+                <div class="text-center mb-3">
+                    <div class="auth-icon mb-2">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                    </div>
+                    <h2 class="fw-bold mb-1 fs-4">Welcome back</h2>
+                    <p class="text-muted small mb-0">Log in to continue</p>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label small fw-semibold mb-1">Username</label>
+                        <input type="text" name="username" id="id_username" class="form-control" placeholder="Enter your username" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label small fw-semibold mb-1">Password</label>
+                        <input type="password" name="password" id="id_password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold rounded-3">
+                        Login
+                    </button>
+
+                </form>
+
+                <p class="text-center text-muted small mt-3 mb-0">
+                    No account?
+                    <a href="{% url 'signup' %}" class="fw-semibold text-decoration-none">Sign up</a>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .auth-card {
+        background: #ffffff;
+    }
+
+    .auth-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #4f46e5, #6366f1);
+        color: #fff;
+        font-size: 1.4rem;
+    }
+
+    .form-control {
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.9rem;
+        border: 1px solid #dcdfe4;
+    }
+
+    .form-control:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.15);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4f46e5, #6366f1);
+        border: none;
+        font-size: 0.95rem;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+    }
+
+    body {
+        background: #f5f6fa;
+    }
+</style>
+
+{% endblock %}

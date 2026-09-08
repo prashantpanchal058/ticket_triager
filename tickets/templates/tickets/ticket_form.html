@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}
+Submit a Ticket
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+
+        <div class="card border-0 shadow-lg rounded-4 auth-card">
+            <div class="card-body p-4">
+
+                <div class="text-center mb-3">
+                    <div class="auth-icon mb-2">
+                        <i class="bi bi-headset"></i>
+                    </div>
+                    <h2 class="fw-bold mb-1 fs-4">Submit a Support Ticket</h2>
+                    <p class="text-muted small mb-0">We'll get back to you as soon as possible</p>
+                </div>
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger py-2 small">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="{{ form.subject.id_for_label }}" class="form-label small fw-semibold mb-1">Subject</label>
+                        {{ form.subject }}
+                        {% if form.subject.errors %}
+                            <div class="text-danger small mt-1">{{ form.subject.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.body.id_for_label }}" class="form-label small fw-semibold mb-1">Description</label>
+                        {{ form.body }}
+                        {% if form.body.errors %}
+                            <div class="text-danger small mt-1">{{ form.body.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.submitted_by.id_for_label }}" class="form-label small fw-semibold mb-1">Your email</label>
+                        {{ form.submitted_by }}
+                        {% if form.submitted_by.errors %}
+                            <div class="text-danger small mt-1">{{ form.submitted_by.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold rounded-3">
+                        <i class="bi bi-send-fill me-1"></i> Submit Ticket
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .auth-card {
+        background: #ffffff;
+    }
+
+    .auth-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #4f46e5, #6366f1);
+        color: #fff;
+        font-size: 1.4rem;
+    }
+
+    .form-control {
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.9rem;
+        border: 1px solid #dcdfe4;
+    }
+
+    .form-control:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.15);
+    }
+
+    textarea.form-control {
+        resize: vertical;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4f46e5, #6366f1);
+        border: none;
+        font-size: 0.95rem;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+    }
+</style>
+
+{% endblock %}

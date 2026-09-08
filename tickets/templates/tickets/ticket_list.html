@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}
+All Tickets
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">{% if user.is_staff %}All Tickets{% else %}My Tickets{% endif %}</h2>
+        <p class="text-muted small mb-0">{{ tickets|length }} ticket{{ tickets|length|pluralize }} total</p>
+    </div>
+    <a href="{% url 'submit_ticket' %}" class="btn btn-primary rounded-3 fw-semibold">
+        <i class="bi bi-plus-lg me-1"></i> New Ticket
+    </a>
+</div>
+
+<!-- Filters -->
+<form method="get" class="d-flex gap-2 mb-3 flex-wrap">
+    <select name="status" class="form-select form-select-sm w-auto" onchange="this.form.submit()">
+        <option value="">All statuses</option>
+        {% for value, label in status_choices %}
+            <option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="category" class="form-select form-select-sm w-auto" onchange="this.form.submit()">
+        <option value="">All categories</option>
+        {% for value, label in category_choices %}
+            <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+
+    {% if request.GET.status or request.GET.category %}
+        <a href="{% url 'ticket_list' %}" class="btn btn-sm btn-link text-muted text-decoration-none">Clear filters</a>
+    {% endif %}
+</form>
+
+<div class="card border-0 shadow-sm rounded-4">
+    <div class="card-body p-0">
+
+        {% if tickets %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 tickets-table">
+                <thead>
+                    <tr>
+                        <th class="ps-4">Subject</th>
+                        {% if user.is_staff %}<th>Submitted By</th>{% endif %}
+                        <th>Category</th>
+                        <th>Urgency</th>
+                        <th>Status</th>
+                        <th class="pe-4">Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in tickets %}
+                    <tr>
+                        <td class="ps-4">
+                            <a href="{% url 'ticket_detail' ticket.pk %}" class="fw-semibold text-decoration-none ticket-link">
+                                {{ ticket.subject }}
+                            </a>
+                        </td>
+                        {% if user.is_staff %}
+                        <td class="text-muted small">
+                            {{ ticket.submitted_by.get_full_name|default:ticket.submitted_by.username }}
+                        </td>
+                        {% endif %}
+                        <td>
+                            {% if ticket.category %}
+                                <span class="badge badge-soft">{{ ticket.get_category_display }}</span>
+                                <div class="confidence-track mt-1">
+                                    <div class="confidence-fill" style="width: {{ ticket.category_confidence|floatformat:0 }}%;"></div>
+                                </div>
+                                <span class="text-muted" style="font-size: 0.7rem;">{{ ticket.category_confidence|floatformat:0 }}% confidence</span>
+                            {% else %}
+                                <span class="text-muted">—</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if ticket.urgency %}
+                                <span class="badge urgency-{{ ticket.urgency|lower }}">{{ ticket.get_urgency_display }}</span>
+                                <div class="confidence-track mt-1">
+                                    <div class="confidence-fill" style="width: {{ ticket.urgency_confidence|floatformat:0 }}%;"></div>
+                                </div>
+                                <span class="text-muted" style="font-size: 0.7rem;">{{ ticket.urgency_confidence|floatformat:0 }}% confidence</span>
+                            {% else %}
+                                <span class="text-muted">—</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="badge status-{{ ticket.status|lower }}">{{ ticket.get_status_display }}</span>
+                        </td>
+                        <td class="pe-4 text-muted small">
+                            {{ ticket.created_at|date:"M d, Y H:i" }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="bi bi-inbox fs-1 text-muted"></i>
+            <p class="text-muted mt-2 mb-0">
+                {% if request.GET.status or request.GET.category %}
+                    No tickets match these filters
+                {% else %}
+                    No tickets yet
+                {% endif %}
+            </p>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+<style>
+    .tickets-table thead th {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #6b7280;
+        border-bottom: 1px solid #eef0f3;
+        padding-top: 0.9rem;
+        padding-bottom: 0.9rem;
+    }
+
+    .tickets-table td {
+        padding-top: 0.9rem;
+        padding-bottom: 0.9rem;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .ticket-link {
+        color: #1f2937;
+    }
+
+    .ticket-link:hover {
+        color: #4f46e5;
+    }
+
+    .badge-soft {
+        background: #eef2ff;
+        color: #4f46e5;
+        font-weight: 500;
+        padding: 0.35em 0.65em;
+    }
+
+    .confidence-track {
+        width: 70px;
+        height: 4px;
+        background: #eef0f3;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .confidence-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #4f46e5, #6366f1);
+        border-radius: 2px;
+    }
+
+    /* Urgency badges */
+    .urgency-low { background: #ecfdf5; color: #059669; font-weight: 500; padding: 0.35em 0.65em; }
+    .urgency-medium { background: #fffbeb; color: #d97706; font-weight: 500; padding: 0.35em 0.65em; }
+    .urgency-high { background: #fef2f2; color: #dc2626; font-weight: 500; padding: 0.35em 0.65em; }
+    .urgency-critical { background: #450a0a; color: #fff; font-weight: 500; padding: 0.35em 0.65em; }
+
+    /* Status badges */
+    .status-open { background: #eff6ff; color: #2563eb; font-weight: 500; padding: 0.35em 0.65em; }
+    .status-in_progress { background: #fffbeb; color: #d97706; font-weight: 500; padding: 0.35em 0.65em; }
+    .status-resolved { background: #ecfdf5; color: #059669; font-weight: 500; padding: 0.35em 0.65em; }
+    .status-closed { background: #f3f4f6; color: #6b7280; font-weight: 500; padding: 0.35em 0.65em; }
+
+    .card { background: #fff; }
+</style>
+
+{% endblock %}

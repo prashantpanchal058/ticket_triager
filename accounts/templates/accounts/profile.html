@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head><title>Profile</title></head>
+<body>
+    <h1>{{ profile.user.username }}</h1>
+    <p>Role: {{ profile.get_role_display }}</p>
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>
