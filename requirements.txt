@@ -11,10 +11,13 @@ click-didyoumean==0.3.1
 click-plugins==1.1.1.2
 click-repl==0.3.0
 colorama==0.4.6
+dj-database-url==3.1.2
 Django==5.2.17
 djangorestframework==3.18.0
+dotenv==0.9.9
 filelock==3.32.5
 fsspec==2026.7.0
+gunicorn==26.2.0
 h11==0.16.0
 hf-xet==1.6.0
 httpcore==1.0.9
@@ -33,9 +36,13 @@ packaging==26.3
 peft==0.20.0
 prompt_toolkit==3.0.53
 psutil==7.2.2
+psycopg==3.3.5
+psycopg2-binary==2.9.12
 Pygments==2.21.0
 pytailwindcss==0.3.1
 python-dateutil==2.9.0.post0
+python-decouple==3.8
+python-dotenv==1.2.3
 PyYAML==6.0.3
 redis==8.1.0
 regex==2026.9.3
@@ -55,3 +62,4 @@ tzdata==2026.3
 tzlocal==5.4.4
 vine==5.1.0
 wcwidth==0.8.3
+whitenoise==6.12.0
