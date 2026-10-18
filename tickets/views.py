@@ -17,9 +17,9 @@ def submit_ticket(request):
 
             result = predict(ticket.subject, ticket.body)
             ticket.category = result["category"]
-            ticket.category_confidence = result["category_confidence"]
+            ticket.category_confidence = result["category_confidence"]*100
             ticket.urgency = result["urgency"]
-            ticket.urgency_confidence = result["urgency_confidence"]
+            ticket.urgency_confidence = result["urgency_confidence"]*100
 
             ticket.save()
             messages.success(request, "Ticket submitted and triaged.")
