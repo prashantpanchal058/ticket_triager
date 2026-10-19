@@ -6,56 +6,86 @@ Submit a Ticket
 
 {% block content %}
 
+<!-- Animated page background -->
+<div class="st-bg" aria-hidden="true">
+    <span class="st-orb st-orb-1"></span>
+    <span class="st-orb st-orb-2"></span>
+    <span class="st-orb st-orb-3"></span>
+    <span class="st-grid"></span>
+</div>
+
 <div class="row justify-content-center">
-    <div class="col-md-7 col-lg-6">
+    <div class="col-md-8 col-lg-6">
 
-        <div class="card border-0 shadow-lg rounded-4 auth-card">
-            <div class="card-body p-4">
+        <div class="st-card">
+            <div class="st-card-glow"></div>
+            <div class="st-card-body">
 
-                <div class="text-center mb-3">
-                    <div class="auth-icon mb-2">
-                        <i class="bi bi-headset"></i>
+                <!-- Header -->
+                <div class="st-header">
+                    <div class="st-icon-wrap">
+                        <span class="st-ring st-ring-1"></span>
+                        <span class="st-ring st-ring-2"></span>
+                        <div class="st-icon"><i class="bi bi-headset"></i></div>
                     </div>
-                    <h2 class="fw-bold mb-1 fs-4">Submit a Support Ticket</h2>
-                    <p class="text-muted small mb-0">We'll get back to you as soon as possible</p>
+                    <span class="st-eyebrow"><i class="bi bi-stars"></i> Support Center</span>
+                    <h2 class="st-title">Submit a Support Ticket</h2>
+                    <p class="st-sub">Tell us what's going on and we'll get back to you as soon as possible.</p>
                 </div>
 
                 {% if form.non_field_errors %}
-                <div class="alert alert-danger py-2 small">
-                    {{ form.non_field_errors }}
+                <div class="st-alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <div>{{ form.non_field_errors }}</div>
                 </div>
                 {% endif %}
 
-                <form method="post">
+                <form method="post" id="stForm" class="st-form" novalidate>
                     {% csrf_token %}
 
-                    <div class="mb-3">
-                        <label for="{{ form.subject.id_for_label }}" class="form-label small fw-semibold mb-1">Subject</label>
-                        {{ form.subject }}
+                    <div class="st-field {% if form.subject.errors %}has-error{% endif %}" style="--d: 0">
+                        <label for="{{ form.subject.id_for_label }}" class="st-label">
+                            <i class="bi bi-chat-left-text"></i> Subject
+                        </label>
+                        <div class="st-input">
+                            {{ form.subject }}
+                        </div>
                         {% if form.subject.errors %}
-                            <div class="text-danger small mt-1">{{ form.subject.errors.0 }}</div>
+                            <div class="st-error"><i class="bi bi-exclamation-circle-fill"></i> {{ form.subject.errors.0 }}</div>
                         {% endif %}
                     </div>
 
-                    <div class="mb-3">
-                        <label for="{{ form.body.id_for_label }}" class="form-label small fw-semibold mb-1">Description</label>
-                        {{ form.body }}
+                    <div class="st-field {% if form.body.errors %}has-error{% endif %}" style="--d: 1">
+                        <label for="{{ form.body.id_for_label }}" class="st-label">
+                            <i class="bi bi-file-text"></i> Description
+                            <span class="st-counter" id="stCounter">0 characters</span>
+                        </label>
+                        <div class="st-input">
+                            {{ form.body }}
+                        </div>
                         {% if form.body.errors %}
-                            <div class="text-danger small mt-1">{{ form.body.errors.0 }}</div>
+                            <div class="st-error"><i class="bi bi-exclamation-circle-fill"></i> {{ form.body.errors.0 }}</div>
                         {% endif %}
                     </div>
 
-                    <div class="mb-4">
-                        <label for="{{ form.submitted_by.id_for_label }}" class="form-label small fw-semibold mb-1">Your email</label>
-                        {{ form.submitted_by }}
+                    <div class="st-field {% if form.submitted_by.errors %}has-error{% endif %}" style="--d: 2">
+                        <label for="{{ form.submitted_by.id_for_label }}" class="st-label">
+                            <i class="bi bi-envelope"></i> Your email
+                        </label>
+                        <div class="st-input">
+                            {{ form.submitted_by }}
+                        </div>
                         {% if form.submitted_by.errors %}
-                            <div class="text-danger small mt-1">{{ form.submitted_by.errors.0 }}</div>
+                            <div class="st-error"><i class="bi bi-exclamation-circle-fill"></i> {{ form.submitted_by.errors.0 }}</div>
                         {% endif %}
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold rounded-3">
-                        <i class="bi bi-send-fill me-1"></i> Submit Ticket
+                    <button type="submit" class="btn st-btn" id="stSubmit" style="--d: 3">
+                        <span class="st-btn-content"><i class="bi bi-send-fill"></i> Submit Ticket</span>
+                        <span class="st-btn-loading"><span class="st-spinner"></span> Sending...</span>
                     </button>
+
+                    <p class="st-note"><i class="bi bi-shield-lock-fill"></i> Your details are kept private and only used to respond to your ticket.</p>
 
                 </form>
 
@@ -66,50 +96,333 @@ Submit a Ticket
 </div>
 
 <style>
-    .auth-card {
-        background: #ffffff;
+    :root {
+        --st-accent: #6366f1;
+        --st-accent-dark: #4f46e5;
+        --st-violet: #8b5cf6;
+        --st-pink: #ec4899;
+        --st-text: #0f172a;
+        --st-muted: #64748b;
+        --st-ease: cubic-bezier(.22, 1, .36, 1);
     }
 
-    .auth-icon {
-        width: 52px;
-        height: 52px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #4f46e5, #6366f1);
+    /* ---------- Background ---------- */
+    body {
+        background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 40%, #fdf2f8 75%, #eff6ff 100%) fixed !important;
+        background-size: 200% 200% !important;
+        animation: st-bg-shift 18s ease-in-out infinite;
+    }
+    @keyframes st-bg-shift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+    .st-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .st-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .5; }
+    .st-orb-1 { width: 420px; height: 420px; background: #a5b4fc; top: -120px; left: -100px; animation: st-drift 16s ease-in-out infinite; }
+    .st-orb-2 { width: 380px; height: 380px; background: #f0abfc; top: 25%; right: -120px; animation: st-drift 20s ease-in-out infinite reverse; }
+    .st-orb-3 { width: 340px; height: 340px; background: #93c5fd; bottom: -120px; left: 30%; animation: st-drift 18s ease-in-out infinite; }
+    @keyframes st-drift {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(50px, 30px) scale(1.1); }
+        66% { transform: translate(-30px, 50px) scale(.95); }
+    }
+    .st-grid {
+        position: absolute; inset: 0;
+        background-image:
+            linear-gradient(rgba(99,102,241,.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99,102,241,.06) 1px, transparent 1px);
+        background-size: 44px 44px;
+        -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+        mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    }
+
+    /* ---------- Card ---------- */
+    .st-card {
+        position: relative;
+        background: rgba(255,255,255,.8);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(255,255,255,.75);
+        border-radius: 28px;
+        box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 40px 80px -36px rgba(79,70,229,.45);
+        overflow: hidden;
+        opacity: 0;
+        animation: st-rise .9s .05s var(--st-ease) forwards;
+        transition: box-shadow .4s var(--st-ease);
+    }
+    .st-card:hover { box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 50px 90px -36px rgba(79,70,229,.55); }
+    .st-card-body { position: relative; padding: 2.2rem 2rem 1.8rem; }
+    .st-card-glow {
+        position: absolute; top: 0; left: 0; right: 0; height: 4px;
+        background: linear-gradient(90deg, var(--st-accent), var(--st-violet), var(--st-pink), var(--st-accent));
+        background-size: 300% 100%;
+        animation: st-flow 5s linear infinite;
+    }
+    @keyframes st-flow { to { background-position: 300% 0; } }
+
+    /* ---------- Header ---------- */
+    .st-header { text-align: center; margin-bottom: 1.8rem; }
+    .st-icon-wrap {
+        position: relative;
+        width: 76px; height: 76px;
+        margin: 0 auto 1.1rem;
+        display: flex; align-items: center; justify-content: center;
+        animation: st-pop .9s .25s var(--st-ease) both;
+    }
+    .st-icon {
+        position: relative; z-index: 2;
+        width: 64px; height: 64px;
+        border-radius: 22px;
+        background: linear-gradient(135deg, var(--st-accent), var(--st-violet), var(--st-pink));
+        background-size: 200% 200%;
         color: #fff;
-        font-size: 1.4rem;
+        font-size: 1.7rem;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 16px 30px -12px rgba(99,102,241,.9);
+        animation: st-bob 3.5s ease-in-out infinite, st-grad 6s ease infinite;
     }
-
-    .form-control {
-        border-radius: 0.5rem;
-        padding: 0.5rem 0.85rem;
-        font-size: 0.9rem;
-        border: 1px solid #dcdfe4;
+    .st-icon i { animation: st-wiggle 4s ease-in-out infinite; }
+    .st-ring {
+        position: absolute; inset: 6px;
+        border-radius: 24px;
+        border: 2px solid rgba(99,102,241,.35);
+        animation: st-ripple 2.8s cubic-bezier(0,0,.2,1) infinite;
     }
+    .st-ring-2 { animation-delay: 1.4s; }
+    @keyframes st-ripple { 0% { transform: scale(.9); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
+    @keyframes st-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes st-grad { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    @keyframes st-wiggle { 0%, 88%, 100% { transform: rotate(0); } 92% { transform: rotate(-12deg); } 96% { transform: rotate(10deg); } }
 
-    .form-control:focus {
-        border-color: #6366f1;
-        box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.15);
+    .st-eyebrow {
+        display: inline-flex; align-items: center; gap: .4rem;
+        font-size: .7rem; font-weight: 700;
+        letter-spacing: .08em; text-transform: uppercase;
+        color: var(--st-accent-dark);
+        background: rgba(99,102,241,.1);
+        border: 1px solid rgba(99,102,241,.18);
+        padding: .25rem .7rem;
+        border-radius: 999px;
+        margin-bottom: .7rem;
+        animation: st-fade-up .7s .35s var(--st-ease) both;
     }
-
-    textarea.form-control {
-        resize: vertical;
+    .st-title {
+        font-weight: 800;
+        font-size: 1.65rem;
+        letter-spacing: -.03em;
+        margin: 0 0 .35rem;
+        background: linear-gradient(120deg, #0f172a 25%, var(--st-accent-dark) 60%, var(--st-violet));
+        background-size: 200% auto;
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: st-shine 6s linear infinite, st-fade-up .7s .42s var(--st-ease) both;
     }
+    @keyframes st-shine { to { background-position: 200% center; } }
+    .st-sub { color: var(--st-muted); font-size: .9rem; margin: 0; animation: st-fade-up .7s .5s var(--st-ease) both; }
 
-    .btn-primary {
-        background: linear-gradient(135deg, #4f46e5, #6366f1);
-        border: none;
-        font-size: 0.95rem;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    /* ---------- Alert ---------- */
+    .st-alert {
+        display: flex; gap: .7rem; align-items: flex-start;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        color: #b91c1c;
+        border-radius: 14px;
+        padding: .8rem 1rem;
+        font-size: .85rem;
+        margin-bottom: 1.2rem;
+        animation: st-shake .5s ease both;
     }
+    .st-alert i { margin-top: .15rem; }
+    .st-alert ul { margin: 0; padding: 0; list-style: none; }
 
-    .btn-primary:hover {
+    /* ---------- Fields ---------- */
+    .st-field {
+        margin-bottom: 1.2rem;
+        opacity: 0;
+        animation: st-fade-up .65s var(--st-ease) forwards;
+        animation-delay: calc(var(--d) * 100ms + 600ms);
+    }
+    .st-label {
+        display: flex; align-items: center; gap: .4rem;
+        font-size: .78rem; font-weight: 700;
+        color: #475569;
+        margin-bottom: .45rem;
+        transition: color .2s;
+    }
+    .st-label i { color: var(--st-accent); transition: transform .3s var(--st-ease); }
+    .st-field:focus-within .st-label { color: var(--st-accent-dark); }
+    .st-field:focus-within .st-label i { transform: scale(1.25) rotate(-8deg); }
+    .st-counter { margin-left: auto; font-weight: 500; font-size: .7rem; color: #94a3b8; font-variant-numeric: tabular-nums; }
+
+    .st-input { position: relative; }
+    .st-input::after {
+        content: "";
+        position: absolute; left: 14px; right: 14px; bottom: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--st-accent), var(--st-violet), var(--st-pink));
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .4s var(--st-ease);
+    }
+    .st-field:focus-within .st-input::after { transform: scaleX(1); }
+
+    .st-form .form-control,
+    .st-form input[type="text"],
+    .st-form input[type="email"],
+    .st-form textarea,
+    .st-form select {
+        width: 100%;
+        background-color: rgba(255,255,255,.92);
+        border: 1.5px solid #e1e5f2;
+        border-radius: 14px;
+        padding: .75rem 1rem;
+        font-size: .93rem;
+        color: var(--st-text);
+        transition: all .25s var(--st-ease);
+    }
+    .st-form .form-control::placeholder,
+    .st-form input::placeholder,
+    .st-form textarea::placeholder { color: #a3acc2; }
+    .st-form .form-control:hover,
+    .st-form input:hover,
+    .st-form textarea:hover { border-color: #c1c9f5; }
+    .st-form .form-control:focus,
+    .st-form input:focus,
+    .st-form textarea:focus,
+    .st-form select:focus {
+        outline: 0;
+        background-color: #fff;
+        border-color: var(--st-accent);
+        box-shadow: 0 0 0 4px rgba(99,102,241,.14), 0 14px 24px -16px rgba(99,102,241,.7);
         transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+    }
+    .st-form textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+
+    /* Errors */
+    .st-field.has-error .st-input input,
+    .st-field.has-error .st-input textarea { border-color: #f87171; background-color: #fff7f7; animation: st-shake .45s ease; }
+    .st-error {
+        display: flex; align-items: center; gap: .4rem;
+        color: #dc2626;
+        font-size: .78rem; font-weight: 500;
+        margin-top: .4rem;
+        animation: st-fade-up .4s var(--st-ease) both;
+    }
+
+    /* ---------- Button ---------- */
+    .st-btn {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        border: 0;
+        border-radius: 16px;
+        padding: .9rem 1.5rem;
+        font-weight: 700;
+        font-size: 1rem;
+        color: #fff;
+        background: linear-gradient(135deg, var(--st-accent), var(--st-violet), var(--st-pink));
+        background-size: 200% 200%;
+        box-shadow: 0 16px 30px -12px rgba(99,102,241,.9);
+        opacity: 0;
+        animation: st-fade-up .65s var(--st-ease) forwards;
+        animation-delay: calc(var(--d) * 100ms + 600ms);
+        transition: transform .25s var(--st-ease), box-shadow .25s var(--st-ease), background-position .6s ease;
+    }
+    .st-btn::after {
+        content: "";
+        position: absolute; top: 0; left: -75%;
+        width: 50%; height: 100%;
+        background: linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent);
+        transform: skewX(-20deg);
+    }
+    .st-btn:hover {
+        color: #fff;
+        transform: translateY(-3px) scale(1.01);
+        background-position: 100% 50%;
+        box-shadow: 0 24px 38px -14px rgba(99,102,241,.95);
+    }
+    .st-btn:hover::after { animation: st-sweep .8s ease; }
+    .st-btn:active { transform: scale(.98); }
+    .st-btn-content i { display: inline-block; margin-right: .35rem; transition: transform .45s var(--st-ease); }
+    .st-btn:hover .st-btn-content i { transform: translate(5px, -5px) rotate(8deg); }
+    .st-btn-loading { display: none; align-items: center; justify-content: center; gap: .55rem; }
+    .st-btn.is-loading .st-btn-content { display: none; }
+    .st-btn.is-loading .st-btn-loading { display: inline-flex; }
+    .st-btn.is-loading { pointer-events: none; opacity: .92; }
+    .st-spinner {
+        width: 17px; height: 17px;
+        border: 2px solid rgba(255,255,255,.4);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: st-spin .7s linear infinite;
+    }
+    @keyframes st-sweep { to { left: 130%; } }
+    @keyframes st-spin { to { transform: rotate(360deg); } }
+
+    .st-note {
+        display: flex; align-items: center; justify-content: center; gap: .4rem;
+        font-size: .74rem;
+        color: #94a3b8;
+        margin: 1rem 0 0;
+        text-align: center;
+        animation: st-fade-up .6s 1.1s var(--st-ease) both;
+    }
+
+    /* ---------- Keyframes ---------- */
+    @keyframes st-rise { from { opacity: 0; transform: translateY(36px) scale(.97); } to { opacity: 1; transform: none; } }
+    @keyframes st-fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @keyframes st-pop { 0% { transform: scale(.4) rotate(-20deg); opacity: 0; } 60% { transform: scale(1.12) rotate(4deg); } 100% { transform: none; opacity: 1; } }
+    @keyframes st-shake {
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-6px); }
+        40% { transform: translateX(6px); }
+        60% { transform: translateX(-4px); }
+        80% { transform: translateX(4px); }
+    }
+
+    @media (max-width: 576px) {
+        .st-card-body { padding: 1.6rem 1.25rem 1.4rem; }
+        .st-title { font-size: 1.4rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important;
+            animation-delay: 0ms !important;
+            transition-duration: .01ms !important;
+        }
+        .st-card, .st-field, .st-btn { opacity: 1; }
     }
 </style>
+
+<script>
+(function () {
+    var form = document.getElementById('stForm');
+    var btn = document.getElementById('stSubmit');
+    var body = document.getElementById('{{ form.body.id_for_label }}');
+    var counter = document.getElementById('stCounter');
+
+    // Loading state on submit
+    if (form && btn) {
+        form.addEventListener('submit', function () {
+            btn.classList.add('is-loading');
+        });
+    }
+
+    // Live character counter + auto-grow for the description
+    if (body && counter) {
+        function update() {
+            var n = body.value.length;
+            counter.textContent = n + ' character' + (n === 1 ? '' : 's');
+            body.style.height = 'auto';
+            body.style.height = Math.min(body.scrollHeight + 2, 360) + 'px';
+        }
+        body.addEventListener('input', update);
+        update();
+    }
+})();
+</script>
 
 {% endblock %}

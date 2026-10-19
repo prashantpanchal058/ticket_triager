@@ -6,174 +6,668 @@ All Tickets
 
 {% block content %}
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h2 class="fw-bold mb-0">{% if user.is_staff %}All Tickets{% else %}My Tickets{% endif %}</h2>
-        <p class="text-muted small mb-0">{{ tickets|length }} ticket{{ tickets|length|pluralize }} total</p>
+<div class="tl-page">
+    <!-- Animated background blobs -->
+    <div class="tl-blob tl-blob-1"></div>
+    <div class="tl-blob tl-blob-2"></div>
+
+    <!-- Header -->
+    <div class="tl-header">
+        <div>
+            <span class="tl-eyebrow"><i class="bi bi-stars"></i> Support Center</span>
+            <h2 class="tl-title">{% if user.is_staff %}All Tickets{% else %}My Tickets{% endif %}</h2>
+            <p class="tl-sub">
+                <span class="tl-count" id="tlCount" data-target="{{ tickets|length }}">0</span>
+                <span id="tlCountLabel">ticket{{ tickets|length|pluralize }}</span>
+                {% if request.GET.status or request.GET.category %}matching your filters{% else %}in total{% endif %}
+            </p>
+        </div>
+        <a href="{% url 'submit_ticket' %}" class="btn tl-btn-primary">
+            <i class="bi bi-plus-lg"></i> New Ticket
+        </a>
     </div>
-    <a href="{% url 'submit_ticket' %}" class="btn btn-primary rounded-3 fw-semibold">
-        <i class="bi bi-plus-lg me-1"></i> New Ticket
-    </a>
-</div>
 
-<!-- Filters -->
-<form method="get" class="d-flex gap-2 mb-3 flex-wrap">
-    <select name="status" class="form-select form-select-sm w-auto" onchange="this.form.submit()">
-        <option value="">All statuses</option>
-        {% for value, label in status_choices %}
-            <option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>{{ label }}</option>
-        {% endfor %}
-    </select>
+    <!-- Toolbar -->
+    <form method="get" class="tl-toolbar">
+        <div class="tl-search">
+            <i class="bi bi-search"></i>
+            <input type="text" id="tlSearch" placeholder="Search tickets..." autocomplete="off" aria-label="Search tickets">
+            <kbd>/</kbd>
+        </div>
 
-    <select name="category" class="form-select form-select-sm w-auto" onchange="this.form.submit()">
-        <option value="">All categories</option>
-        {% for value, label in category_choices %}
-            <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>{{ label }}</option>
-        {% endfor %}
-    </select>
+        <div class="tl-select">
+            <i class="bi bi-lightning-charge"></i>
+            <select name="status" onchange="this.form.submit()" aria-label="Filter by status">
+                <option value="">All statuses</option>
+                {% for value, label in status_choices %}
+                    <option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-    {% if request.GET.status or request.GET.category %}
-        <a href="{% url 'ticket_list' %}" class="btn btn-sm btn-link text-muted text-decoration-none">Clear filters</a>
-    {% endif %}
-</form>
+        <div class="tl-select">
+            <i class="bi bi-tag"></i>
+            <select name="category" onchange="this.form.submit()" aria-label="Filter by category">
+                <option value="">All categories</option>
+                {% for value, label in category_choices %}
+                    <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-<div class="card border-0 shadow-sm rounded-4">
-    <div class="card-body p-0">
+        {% if request.GET.status or request.GET.category %}
+            <a href="{% url 'ticket_list' %}" class="tl-clear"><i class="bi bi-x-circle"></i> Clear</a>
+        {% endif %}
+    </form>
 
+    <!-- Table card -->
+    <div class="tl-card">
         {% if tickets %}
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0 tickets-table">
+            <table class="tl-table">
                 <thead>
                     <tr>
                         <th class="ps-4">Subject</th>
-                        {% if user.is_staff %}<th>Submitted By</th>{% endif %}
+                        {% if user.is_staff %}<th>Submitted by</th>{% endif %}
                         <th>Category</th>
                         <th>Urgency</th>
                         <th>Status</th>
-                        <th class="pe-4">Created</th>
+                        <th class="pe-4 text-end">Created</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tlBody">
                     {% for ticket in tickets %}
-                    <tr>
+                    <tr class="tl-row" style="--i: {{ forloop.counter0 }};">
                         <td class="ps-4">
-                            <a href="{% url 'ticket_detail' ticket.pk %}" class="fw-semibold text-decoration-none ticket-link">
-                                {{ ticket.subject }}
+                            <a href="{% url 'ticket_detail' ticket.pk %}" class="tl-subject">
+                                <span>{{ ticket.subject }}</span>
+                                <i class="bi bi-arrow-right-short"></i>
                             </a>
                         </td>
+
                         {% if user.is_staff %}
-                        <td class="text-muted small">
-                            {{ ticket.submitted_by.get_full_name|default:ticket.submitted_by.username }}
+                        <td>
+                            <div class="tl-user">
+                                <span class="tl-avatar">{{ ticket.submitted_by.username|first|upper }}</span>
+                                <span>{{ ticket.submitted_by.get_full_name|default:ticket.submitted_by.username }}</span>
+                            </div>
                         </td>
                         {% endif %}
+
                         <td>
                             {% if ticket.category %}
-                                <span class="badge badge-soft">{{ ticket.get_category_display }}</span>
-                                <div class="confidence-track mt-1">
-                                    <div class="confidence-fill" style="width: {{ ticket.category_confidence|floatformat:0 }}%;"></div>
+                                <span class="tl-chip">{{ ticket.get_category_display }}</span>
+                                <div class="tl-conf" title="{{ ticket.category_confidence|floatformat:0 }}% confidence">
+                                    <div class="tl-conf-track"><div class="tl-conf-fill" style="--w: {{ ticket.category_confidence|floatformat:0 }}%;"></div></div>
+                                    <span>{{ ticket.category_confidence|floatformat:0 }}%</span>
                                 </div>
-                                <span class="text-muted" style="font-size: 0.7rem;">{{ ticket.category_confidence|floatformat:0 }}% confidence</span>
                             {% else %}
-                                <span class="text-muted">—</span>
+                                <span class="tl-empty">—</span>
                             {% endif %}
                         </td>
+
                         <td>
                             {% if ticket.urgency %}
-                                <span class="badge urgency-{{ ticket.urgency|lower }}">{{ ticket.get_urgency_display }}</span>
-                                <div class="confidence-track mt-1">
-                                    <div class="confidence-fill" style="width: {{ ticket.urgency_confidence|floatformat:0 }}%;"></div>
+                                <span class="tl-pill urgency-{{ ticket.urgency|lower }}"><i class="dot"></i>{{ ticket.get_urgency_display }}</span>
+                                <div class="tl-conf" title="{{ ticket.urgency_confidence|floatformat:0 }}% confidence">
+                                    <div class="tl-conf-track"><div class="tl-conf-fill" style="--w: {{ ticket.urgency_confidence|floatformat:0 }}%;"></div></div>
+                                    <span>{{ ticket.urgency_confidence|floatformat:0 }}%</span>
                                 </div>
-                                <span class="text-muted" style="font-size: 0.7rem;">{{ ticket.urgency_confidence|floatformat:0 }}% confidence</span>
                             {% else %}
-                                <span class="text-muted">—</span>
+                                <span class="tl-empty">—</span>
                             {% endif %}
                         </td>
+
                         <td>
-                            <span class="badge status-{{ ticket.status|lower }}">{{ ticket.get_status_display }}</span>
+                            <span class="tl-pill status-{{ ticket.status|lower }}"><i class="dot"></i>{{ ticket.get_status_display }}</span>
                         </td>
-                        <td class="pe-4 text-muted small">
-                            {{ ticket.created_at|date:"M d, Y H:i" }}
+
+                        <td class="pe-4 text-end">
+                            <div class="tl-date">{{ ticket.created_at|date:"M d, Y" }}</div>
+                            <div class="tl-time">{{ ticket.created_at|date:"H:i" }}</div>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+
+        <div class="tl-emptystate" id="tlNoMatch" hidden>
+            <div class="tl-emptyicon"><i class="bi bi-search"></i></div>
+            <h5>No results found</h5>
+            <p>Nothing matches your search. Try a different keyword.</p>
+        </div>
         {% else %}
-        <div class="text-center py-5">
-            <i class="bi bi-inbox fs-1 text-muted"></i>
-            <p class="text-muted mt-2 mb-0">
+        <div class="tl-emptystate">
+            <div class="tl-emptyicon"><i class="bi bi-inbox"></i></div>
+            <h5>
                 {% if request.GET.status or request.GET.category %}
                     No tickets match these filters
                 {% else %}
                     No tickets yet
                 {% endif %}
+            </h5>
+            <p>
+                {% if request.GET.status or request.GET.category %}
+                    Try adjusting or clearing your filters.
+                {% else %}
+                    Create your first ticket and it will show up here.
+                {% endif %}
             </p>
+            {% if request.GET.status or request.GET.category %}
+                <a href="{% url 'ticket_list' %}" class="btn tl-btn-ghost">Clear filters</a>
+            {% else %}
+                <a href="{% url 'submit_ticket' %}" class="btn tl-btn-primary"><i class="bi bi-plus-lg"></i> New Ticket</a>
+            {% endif %}
         </div>
         {% endif %}
-
     </div>
 </div>
 
 <style>
-    .tickets-table thead th {
-        font-size: 0.75rem;
+    :root {
+        --tl-accent: #6366f1;
+        --tl-accent-dark: #4f46e5;
+        --tl-violet: #8b5cf6;
+        --tl-text: #0f172a;
+        --tl-muted: #64748b;
+        --tl-border: #e6e9f2;
+        --tl-surface: #ffffff;
+        --tl-hover: #f6f7ff;
+        --tl-ease: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .tl-page { position: relative; isolation: isolate; }
+
+    /* Floating blurred blobs */
+    .tl-blob {
+        position: absolute;
+        z-index: -1;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: .35;
+        pointer-events: none;
+    }
+    .tl-blob-1 {
+        width: 280px; height: 280px;
+        top: -80px; left: -60px;
+        background: #a5b4fc;
+        animation: tl-float 12s ease-in-out infinite;
+    }
+    .tl-blob-2 {
+        width: 240px; height: 240px;
+        top: -40px; right: 5%;
+        background: #f0abfc;
+        animation: tl-float 15s ease-in-out infinite reverse;
+    }
+    @keyframes tl-float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(30px, 24px) scale(1.12); }
+    }
+
+    /* Header */
+    .tl-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+        animation: tl-fade-down .7s var(--tl-ease) both;
+    }
+    .tl-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        font-size: .72rem;
+        font-weight: 600;
+        letter-spacing: .08em;
         text-transform: uppercase;
-        letter-spacing: 0.03em;
-        color: #6b7280;
-        border-bottom: 1px solid #eef0f3;
-        padding-top: 0.9rem;
-        padding-bottom: 0.9rem;
+        color: var(--tl-accent-dark);
+        background: rgba(99, 102, 241, .1);
+        border: 1px solid rgba(99, 102, 241, .18);
+        padding: .28rem .7rem;
+        border-radius: 999px;
+        margin-bottom: .6rem;
+    }
+    .tl-title {
+        font-weight: 800;
+        font-size: 2.1rem;
+        letter-spacing: -.03em;
+        margin: 0;
+        background: linear-gradient(120deg, #0f172a 20%, var(--tl-accent-dark) 60%, var(--tl-violet));
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: tl-shine 6s linear infinite;
+    }
+    @keyframes tl-shine { to { background-position: 200% center; } }
+    .tl-sub { color: var(--tl-muted); font-size: .92rem; margin: .25rem 0 0; }
+    .tl-count {
+        display: inline-block;
+        min-width: 1ch;
+        color: var(--tl-text);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
     }
 
-    .tickets-table td {
-        padding-top: 0.9rem;
-        padding-bottom: 0.9rem;
-        border-bottom: 1px solid #f3f4f6;
+    /* Primary button with shimmer */
+    .tl-btn-primary {
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        gap: .45rem;
+        background: linear-gradient(135deg, var(--tl-accent), var(--tl-violet));
+        color: #fff;
+        font-weight: 600;
+        font-size: .92rem;
+        border: 0;
+        border-radius: 14px;
+        padding: .7rem 1.25rem;
+        box-shadow: 0 10px 24px -10px rgba(99, 102, 241, .8);
+        transition: transform .25s var(--tl-ease), box-shadow .25s var(--tl-ease);
+    }
+    .tl-btn-primary::after {
+        content: "";
+        position: absolute;
+        top: 0; left: -75%;
+        width: 50%; height: 100%;
+        background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent);
+        transform: skewX(-20deg);
+    }
+    .tl-btn-primary:hover {
+        color: #fff;
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 16px 30px -10px rgba(99, 102, 241, .9);
+    }
+    .tl-btn-primary:hover::after { animation: tl-sweep .8s ease; }
+    .tl-btn-primary:active { transform: translateY(0) scale(.98); }
+    .tl-btn-primary i { transition: transform .3s var(--tl-ease); }
+    .tl-btn-primary:hover i { transform: rotate(90deg); }
+    @keyframes tl-sweep { to { left: 130%; } }
+
+    .tl-btn-ghost {
+        border: 1px solid var(--tl-border);
+        border-radius: 12px;
+        color: var(--tl-text);
+        font-weight: 600;
+        font-size: .9rem;
+        padding: .5rem 1rem;
+        transition: all .2s ease;
+    }
+    .tl-btn-ghost:hover { background: var(--tl-hover); border-color: var(--tl-accent); color: var(--tl-accent-dark); }
+
+    /* Toolbar */
+    .tl-toolbar {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: .65rem;
+        margin-bottom: 1.1rem;
+        animation: tl-fade-down .7s .1s var(--tl-ease) both;
+    }
+    .tl-search {
+        position: relative;
+        flex: 1 1 240px;
+        max-width: 340px;
+    }
+    .tl-search > i {
+        position: absolute; left: 1rem; top: 50%;
+        transform: translateY(-50%);
+        color: var(--tl-muted);
+        transition: color .2s;
+    }
+    .tl-search input {
+        width: 100%;
+        background: rgba(255,255,255,.85);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--tl-border);
+        border-radius: 999px;
+        padding: .55rem 2.8rem .55rem 2.6rem;
+        font-size: .88rem;
+        color: var(--tl-text);
+        transition: all .25s var(--tl-ease);
+    }
+    .tl-search input:focus {
+        outline: 0;
+        border-color: var(--tl-accent);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, .15);
+        transform: scale(1.02);
+    }
+    .tl-search:focus-within > i { color: var(--tl-accent); }
+    .tl-search kbd {
+        position: absolute; right: .8rem; top: 50%;
+        transform: translateY(-50%);
+        background: #f1f3f9;
+        color: var(--tl-muted);
+        border: 1px solid var(--tl-border);
+        border-radius: 6px;
+        font-size: .68rem;
+        padding: .05rem .4rem;
+        pointer-events: none;
     }
 
-    .ticket-link {
-        color: #1f2937;
+    .tl-select { position: relative; display: inline-flex; align-items: center; }
+    .tl-select > i {
+        position: absolute; left: .9rem;
+        color: var(--tl-accent);
+        font-size: .85rem;
+        pointer-events: none;
     }
-
-    .ticket-link:hover {
-        color: #4f46e5;
-    }
-
-    .badge-soft {
-        background: #eef2ff;
-        color: #4f46e5;
+    .tl-select select {
+        appearance: none;
+        -webkit-appearance: none;
+        background: rgba(255,255,255,.85)
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%2364748b' stroke-width='2' viewBox='0 0 16 16'%3E%3Cpath d='M2 5.5l6 6 6-6'/%3E%3C/svg%3E")
+            no-repeat right .85rem center / 10px;
+        border: 1px solid var(--tl-border);
+        border-radius: 999px;
+        padding: .5rem 2.3rem .5rem 2.4rem;
+        font-size: .86rem;
         font-weight: 500;
-        padding: 0.35em 0.65em;
+        color: var(--tl-text);
+        cursor: pointer;
+        transition: all .2s var(--tl-ease);
+    }
+    .tl-select select:hover { border-color: #c7cdf5; transform: translateY(-1px); box-shadow: 0 6px 14px -8px rgba(99,102,241,.5); }
+    .tl-select select:focus { outline: 0; border-color: var(--tl-accent); box-shadow: 0 0 0 4px rgba(99,102,241,.15); }
+    .tl-clear {
+        color: var(--tl-muted);
+        font-size: .85rem;
+        text-decoration: none;
+        padding: .45rem .75rem;
+        border-radius: 999px;
+        transition: all .2s;
+    }
+    .tl-clear:hover { color: #dc2626; background: #fef2f2; }
+
+    /* Card */
+    .tl-card {
+        background: rgba(255,255,255,.92);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--tl-border);
+        border-radius: 22px;
+        box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 24px 48px -24px rgba(79,70,229,.25);
+        overflow: hidden;
+        animation: tl-rise .8s .15s var(--tl-ease) both;
     }
 
-    .confidence-track {
-        width: 70px;
-        height: 4px;
-        background: #eef0f3;
-        border-radius: 2px;
+    .tl-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+    .tl-table thead th {
+        background: linear-gradient(180deg, #fafbff, #f5f6fd);
+        font-size: .68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        color: var(--tl-muted);
+        padding: 1rem;
+        border-bottom: 1px solid var(--tl-border);
+        white-space: nowrap;
+    }
+    .tl-table tbody td {
+        padding: 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid #f1f3f9;
+        transition: background .2s ease;
+    }
+    .tl-table tbody tr:last-child td { border-bottom: 0; }
+
+    /* Staggered row entrance */
+    .tl-row {
+        opacity: 0;
+        animation: tl-row-in .6s var(--tl-ease) forwards;
+        animation-delay: calc(min(var(--i), 14) * 55ms + 250ms);
+    }
+    .tl-row td:first-child { position: relative; }
+    .tl-row td:first-child::before {
+        content: "";
+        position: absolute;
+        left: 0; top: 18%; bottom: 18%;
+        width: 3px;
+        border-radius: 0 4px 4px 0;
+        background: linear-gradient(180deg, var(--tl-accent), var(--tl-violet));
+        transform: scaleY(0);
+        transition: transform .3s var(--tl-ease);
+    }
+    .tl-row:hover td { background: var(--tl-hover); }
+    .tl-row:hover td:first-child::before { transform: scaleY(1); }
+
+    .tl-subject {
+        display: inline-flex;
+        align-items: center;
+        gap: .1rem;
+        font-weight: 600;
+        color: var(--tl-text);
+        text-decoration: none;
+        max-width: 340px;
+        transition: color .2s, transform .3s var(--tl-ease);
+    }
+    .tl-subject i {
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: all .3s var(--tl-ease);
+        color: var(--tl-accent);
+        font-size: 1.3rem;
+    }
+    .tl-row:hover .tl-subject { color: var(--tl-accent-dark); transform: translateX(4px); }
+    .tl-row:hover .tl-subject i { opacity: 1; transform: translateX(0); }
+
+    /* User */
+    .tl-user { display: flex; align-items: center; gap: .6rem; font-size: .86rem; color: #334155; }
+    .tl-avatar {
+        width: 32px; height: 32px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #818cf8, var(--tl-violet));
+        color: #fff;
+        font-weight: 700;
+        font-size: .78rem;
+        display: inline-flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px -4px rgba(99,102,241,.7);
+        transition: transform .3s var(--tl-ease);
+    }
+    .tl-row:hover .tl-avatar { transform: scale(1.12) rotate(-6deg); }
+
+    /* Chip */
+    .tl-chip {
+        display: inline-block;
+        background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+        border: 1px solid #e0e7ff;
+        color: var(--tl-accent-dark);
+        font-weight: 600;
+        font-size: .76rem;
+        padding: .28rem .7rem;
+        border-radius: 9px;
+        transition: transform .25s var(--tl-ease);
+    }
+    .tl-row:hover .tl-chip { transform: translateY(-1px); }
+
+    /* Confidence bars (animated fill) */
+    .tl-conf {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        margin-top: .5rem;
+        font-size: .7rem;
+        color: var(--tl-muted);
+        font-variant-numeric: tabular-nums;
+    }
+    .tl-conf-track {
+        width: 60px; height: 5px;
+        background: #eceff8;
+        border-radius: 999px;
         overflow: hidden;
     }
-
-    .confidence-fill {
+    .tl-conf-fill {
         height: 100%;
-        background: linear-gradient(90deg, #4f46e5, #6366f1);
-        border-radius: 2px;
+        width: var(--w);
+        background: linear-gradient(90deg, #818cf8, var(--tl-violet));
+        border-radius: 999px;
+        animation: tl-grow 1.1s var(--tl-ease) both;
+        animation-delay: calc(min(var(--i, 0), 14) * 55ms + 600ms);
+    }
+    .tl-row .tl-conf-fill { animation-delay: calc(min(var(--i), 14) * 55ms + 650ms); }
+    @keyframes tl-grow { from { width: 0; } }
+
+    /* Pills */
+    .tl-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        font-size: .77rem;
+        font-weight: 600;
+        padding: .3rem .75rem;
+        border-radius: 999px;
+        white-space: nowrap;
+        transition: transform .25s var(--tl-ease), box-shadow .25s;
+    }
+    .tl-row:hover .tl-pill { transform: scale(1.05); }
+    .tl-pill .dot {
+        width: 7px; height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+        display: inline-block;
+        position: relative;
     }
 
-    /* Urgency badges */
-    .urgency-low { background: #ecfdf5; color: #059669; font-weight: 500; padding: 0.35em 0.65em; }
-    .urgency-medium { background: #fffbeb; color: #d97706; font-weight: 500; padding: 0.35em 0.65em; }
-    .urgency-high { background: #fef2f2; color: #dc2626; font-weight: 500; padding: 0.35em 0.65em; }
-    .urgency-critical { background: #450a0a; color: #fff; font-weight: 500; padding: 0.35em 0.65em; }
+    .urgency-low { background: #ecfdf5; color: #059669; }
+    .urgency-medium { background: #fffbeb; color: #d97706; }
+    .urgency-high { background: #fef2f2; color: #dc2626; }
+    .urgency-high .dot::after,
+    .status-in_progress .dot::after,
+    .status-open .dot::after {
+        content: "";
+        position: absolute; inset: 0;
+        border-radius: 50%;
+        background: currentColor;
+        animation: tl-ping 1.8s cubic-bezier(0,0,.2,1) infinite;
+    }
+    .urgency-critical {
+        background: linear-gradient(135deg, #7f1d1d, #450a0a);
+        color: #fecaca;
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, .5);
+        animation: tl-glow 2s infinite;
+    }
+    .urgency-critical .dot { background: #f87171; }
+    .urgency-critical .dot::after {
+        content: "";
+        position: absolute; inset: 0;
+        border-radius: 50%;
+        background: #f87171;
+        animation: tl-ping 1.2s cubic-bezier(0,0,.2,1) infinite;
+    }
 
-    /* Status badges */
-    .status-open { background: #eff6ff; color: #2563eb; font-weight: 500; padding: 0.35em 0.65em; }
-    .status-in_progress { background: #fffbeb; color: #d97706; font-weight: 500; padding: 0.35em 0.65em; }
-    .status-resolved { background: #ecfdf5; color: #059669; font-weight: 500; padding: 0.35em 0.65em; }
-    .status-closed { background: #f3f4f6; color: #6b7280; font-weight: 500; padding: 0.35em 0.65em; }
+    .status-open { background: #eff6ff; color: #2563eb; }
+    .status-in_progress { background: #fffbeb; color: #d97706; }
+    .status-resolved { background: #ecfdf5; color: #059669; }
+    .status-closed { background: #f1f5f9; color: #64748b; }
 
-    .card { background: #fff; }
+    .tl-date { font-size: .86rem; color: #334155; font-weight: 600; }
+    .tl-time { font-size: .72rem; color: var(--tl-muted); }
+    .tl-empty { color: #cbd5e1; }
+
+    /* Empty state */
+    .tl-emptystate { text-align: center; padding: 4.5rem 1rem; }
+    .tl-emptystate[hidden] { display: none; }
+    .tl-emptyicon {
+        width: 72px; height: 72px;
+        margin: 0 auto 1.1rem;
+        border-radius: 24px;
+        background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+        color: var(--tl-accent);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.8rem;
+        box-shadow: 0 14px 28px -14px rgba(99,102,241,.6);
+        animation: tl-bob 3s ease-in-out infinite;
+    }
+    .tl-emptystate h5 { font-weight: 700; color: var(--tl-text); margin-bottom: .3rem; }
+    .tl-emptystate p { color: var(--tl-muted); font-size: .92rem; margin-bottom: 1.3rem; }
+
+    /* Keyframes */
+    @keyframes tl-fade-down { from { opacity: 0; transform: translateY(-14px); } }
+    @keyframes tl-rise { from { opacity: 0; transform: translateY(24px) scale(.985); } }
+    @keyframes tl-row-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @keyframes tl-ping { 75%, 100% { transform: scale(2.6); opacity: 0; } }
+    @keyframes tl-glow {
+        0% { box-shadow: 0 0 0 0 rgba(220,38,38,.45); }
+        70% { box-shadow: 0 0 0 9px rgba(220,38,38,0); }
+        100% { box-shadow: 0 0 0 0 rgba(220,38,38,0); }
+    }
+    @keyframes tl-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+    @media (max-width: 576px) {
+        .tl-title { font-size: 1.6rem; }
+        .tl-subject { max-width: 200px; }
+        .tl-search { max-width: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important;
+            animation-delay: 0ms !important;
+            transition-duration: .01ms !important;
+        }
+        .tl-row { opacity: 1; }
+    }
 </style>
+
+<script>
+(function () {
+    // Count-up animation for the ticket total
+    var countEl = document.getElementById('tlCount');
+    if (countEl) {
+        var target = parseInt(countEl.dataset.target, 10) || 0;
+        var duration = 900, start = null;
+        function step(ts) {
+            if (start === null) start = ts;
+            var p = Math.min((ts - start) / duration, 1);
+            var eased = 1 - Math.pow(1 - p, 3);
+            countEl.textContent = Math.round(target * eased);
+            if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    // Live client-side search
+    var input = document.getElementById('tlSearch');
+    var body = document.getElementById('tlBody');
+    var noMatch = document.getElementById('tlNoMatch');
+    var label = document.getElementById('tlCountLabel');
+    if (input && body) {
+        var rows = Array.prototype.slice.call(body.querySelectorAll('.tl-row'));
+        input.addEventListener('input', function () {
+            var q = input.value.trim().toLowerCase();
+            var visible = 0;
+            rows.forEach(function (row) {
+                var show = !q || row.textContent.toLowerCase().indexOf(q) !== -1;
+                row.style.display = show ? '' : 'none';
+                if (show) {
+                    visible++;
+                    // replay entrance animation for matches
+                    row.style.animation = 'none';
+                    void row.offsetWidth;
+                    row.style.animation = 'tl-row-in .4s cubic-bezier(.22,1,.36,1) forwards';
+                }
+            });
+            if (countEl) countEl.textContent = visible;
+            if (label) label.textContent = 'ticket' + (visible === 1 ? '' : 's');
+            if (noMatch) noMatch.hidden = visible !== 0;
+            body.closest('.table-responsive').style.display = visible === 0 ? 'none' : '';
+        });
+
+        // Press "/" to focus search
+        document.addEventListener('keydown', function (e) {
+            var tag = (e.target.tagName || '').toLowerCase();
+            if (e.key === '/' && tag !== 'input' && tag !== 'textarea' && tag !== 'select') {
+                e.preventDefault();
+                input.focus();
+            }
+        });
+    }
+})();
+</script>
 
 {% endblock %}

@@ -7,41 +7,67 @@ Login
 {% block content %}
 
 <div class="row justify-content-center">
-    <div class="col-md-5 col-lg-4">
+    <div class="col-md-7 col-lg-5 col-xl-4">
 
-        <div class="card border-0 shadow-lg rounded-4 auth-card">
-            <div class="card-body p-4">
+        <div class="lg-card">
+            <div class="lg-card-glow"></div>
+            <div class="lg-card-body">
 
-                <div class="text-center mb-3">
-                    <div class="auth-icon mb-2">
-                        <i class="bi bi-box-arrow-in-right"></i>
+                <!-- Header -->
+                <div class="lg-header">
+                    <div class="lg-icon-wrap">
+                        <span class="lg-ring lg-ring-1"></span>
+                        <span class="lg-ring lg-ring-2"></span>
+                        <div class="lg-icon"><i class="bi bi-box-arrow-in-right"></i></div>
                     </div>
-                    <h2 class="fw-bold mb-1 fs-4">Welcome back</h2>
-                    <p class="text-muted small mb-0">Log in to continue</p>
+                    <span class="lg-eyebrow"><i class="bi bi-stars"></i> Welcome</span>
+                    <h2 class="lg-title">Welcome back</h2>
+                    <p class="lg-sub">Log in to continue</p>
                 </div>
 
-                <form method="post">
+                {% if form.non_field_errors %}
+                <div class="lg-alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <div>{{ form.non_field_errors }}</div>
+                </div>
+                {% endif %}
+
+                <form method="post" id="lgForm" class="lg-form">
                     {% csrf_token %}
+                    {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
 
-                    <div class="mb-3">
-                        <label for="id_username" class="form-label small fw-semibold mb-1">Username</label>
-                        <input type="text" name="username" id="id_username" class="form-control" placeholder="Enter your username" required>
+                    <div class="lg-field" style="--d: 0">
+                        <label for="id_username" class="lg-label">
+                            <i class="bi bi-person"></i> Username
+                        </label>
+                        <div class="lg-input">
+                            <input type="text" name="username" id="id_username" class="form-control" placeholder="Enter your username" autocomplete="username" required>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="id_password" class="form-label small fw-semibold mb-1">Password</label>
-                        <input type="password" name="password" id="id_password" class="form-control" placeholder="Enter your password" required>
+                    <div class="lg-field" style="--d: 1">
+                        <label for="id_password" class="lg-label">
+                            <i class="bi bi-lock"></i> Password
+                            <span class="lg-caps" id="lgCaps"><i class="bi bi-capslock-fill"></i> Caps Lock is on</span>
+                        </label>
+                        <div class="lg-input lg-password">
+                            <input type="password" name="password" id="id_password" class="form-control" placeholder="Enter your password" autocomplete="current-password" required>
+                            <button type="button" class="lg-eye" id="lgEye" aria-label="Show or hide password">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold rounded-3">
-                        Login
+                    <button type="submit" class="btn lg-btn" id="lgSubmit" style="--d: 2">
+                        <span class="lg-btn-content">Login <i class="bi bi-arrow-right"></i></span>
+                        <span class="lg-btn-loading"><span class="lg-spinner"></span> Logging in...</span>
                     </button>
 
                 </form>
 
-                <p class="text-center text-muted small mt-3 mb-0">
+                <p class="lg-foot">
                     No account?
-                    <a href="{% url 'signup' %}" class="fw-semibold text-decoration-none">Sign up</a>
+                    <a href="{% url 'signup' %}">Sign up</a>
                 </p>
 
             </div>
@@ -51,50 +77,330 @@ Login
 </div>
 
 <style>
-    .auth-card {
-        background: #ffffff;
+    :root {
+        --lg-accent: #6366f1;
+        --lg-accent-dark: #4f46e5;
+        --lg-violet: #8b5cf6;
+        --lg-pink: #ec4899;
+        --lg-text: #0f172a;
+        --lg-muted: #64748b;
+        --lg-ease: cubic-bezier(.22, 1, .36, 1);
     }
 
-    .auth-icon {
-        width: 52px;
-        height: 52px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #4f46e5, #6366f1);
+    /* ---------- Card ---------- */
+    .lg-card {
+        position: relative;
+        background: rgba(255,255,255,.8);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(255,255,255,.75);
+        border-radius: 28px;
+        box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 40px 80px -36px rgba(79,70,229,.45);
+        overflow: hidden;
+        opacity: 0;
+        animation: lg-rise .9s .05s var(--lg-ease) forwards;
+        transition: box-shadow .4s var(--lg-ease);
+    }
+    .lg-card:hover { box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 50px 90px -36px rgba(79,70,229,.55); }
+    .lg-card-body { padding: 2.2rem 2rem 1.8rem; }
+    .lg-card-glow {
+        position: absolute; top: 0; left: 0; right: 0; height: 4px;
+        background: linear-gradient(90deg, var(--lg-accent), var(--lg-violet), var(--lg-pink), var(--lg-accent));
+        background-size: 300% 100%;
+        animation: lg-flow 5s linear infinite;
+    }
+    @keyframes lg-flow { to { background-position: 300% 0; } }
+
+    /* ---------- Header ---------- */
+    .lg-header { text-align: center; margin-bottom: 1.7rem; }
+    .lg-icon-wrap {
+        position: relative;
+        width: 76px; height: 76px;
+        margin: 0 auto 1.1rem;
+        display: flex; align-items: center; justify-content: center;
+        animation: lg-pop .9s .25s var(--lg-ease) both;
+    }
+    .lg-icon {
+        position: relative; z-index: 2;
+        width: 64px; height: 64px;
+        border-radius: 22px;
+        background: linear-gradient(135deg, var(--lg-accent), var(--lg-violet), var(--lg-pink));
+        background-size: 200% 200%;
         color: #fff;
-        font-size: 1.4rem;
+        font-size: 1.7rem;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 16px 30px -12px rgba(99,102,241,.9);
+        animation: lg-bob 3.5s ease-in-out infinite, lg-grad 6s ease infinite;
     }
-
-    .form-control {
-        border-radius: 0.5rem;
-        padding: 0.5rem 0.85rem;
-        font-size: 0.9rem;
-        border: 1px solid #dcdfe4;
+    .lg-icon i { animation: lg-nudge 3.2s ease-in-out infinite; }
+    .lg-ring {
+        position: absolute; inset: 6px;
+        border-radius: 24px;
+        border: 2px solid rgba(99,102,241,.35);
+        animation: lg-ripple 2.8s cubic-bezier(0,0,.2,1) infinite;
     }
+    .lg-ring-2 { animation-delay: 1.4s; }
+    @keyframes lg-ripple { 0% { transform: scale(.9); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
+    @keyframes lg-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes lg-grad { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    @keyframes lg-nudge { 0%, 70%, 100% { transform: translateX(0); } 80% { transform: translateX(5px); } 90% { transform: translateX(-2px); } }
 
-    .form-control:focus {
-        border-color: #6366f1;
-        box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.15);
+    .lg-eyebrow {
+        display: inline-flex; align-items: center; gap: .4rem;
+        font-size: .7rem; font-weight: 700;
+        letter-spacing: .08em; text-transform: uppercase;
+        color: var(--lg-accent-dark);
+        background: rgba(99,102,241,.1);
+        border: 1px solid rgba(99,102,241,.18);
+        padding: .25rem .7rem;
+        border-radius: 999px;
+        margin-bottom: .7rem;
+        animation: lg-fade-up .7s .35s var(--lg-ease) both;
     }
-
-    .btn-primary {
-        background: linear-gradient(135deg, #4f46e5, #6366f1);
-        border: none;
-        font-size: 0.95rem;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    .lg-title {
+        font-weight: 800;
+        font-size: 1.65rem;
+        letter-spacing: -.03em;
+        margin: 0 0 .35rem;
+        background: linear-gradient(120deg, #0f172a 25%, var(--lg-accent-dark) 60%, var(--lg-violet));
+        background-size: 200% auto;
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: lg-shine 6s linear infinite, lg-fade-up .7s .42s var(--lg-ease) both;
     }
+    @keyframes lg-shine { to { background-position: 200% center; } }
+    .lg-sub { color: var(--lg-muted); font-size: .9rem; margin: 0; animation: lg-fade-up .7s .5s var(--lg-ease) both; }
 
-    .btn-primary:hover {
+    /* ---------- Alert ---------- */
+    .lg-alert {
+        display: flex; gap: .7rem; align-items: flex-start;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        color: #b91c1c;
+        border-radius: 14px;
+        padding: .8rem 1rem;
+        font-size: .85rem;
+        margin-bottom: 1.2rem;
+        animation: lg-shake .5s ease both;
+    }
+    .lg-alert i { margin-top: .15rem; }
+    .lg-alert ul { margin: 0; padding: 0; list-style: none; }
+
+    /* ---------- Fields ---------- */
+    .lg-field {
+        margin-bottom: 1.15rem;
+        opacity: 0;
+        animation: lg-fade-up .65s var(--lg-ease) forwards;
+        animation-delay: calc(var(--d) * 100ms + 600ms);
+    }
+    .lg-label {
+        display: flex; align-items: center; gap: .4rem;
+        font-size: .78rem; font-weight: 700;
+        color: #475569;
+        margin-bottom: .45rem;
+        transition: color .2s;
+    }
+    .lg-label i { color: var(--lg-accent); transition: transform .3s var(--lg-ease); }
+    .lg-field:focus-within .lg-label { color: var(--lg-accent-dark); }
+    .lg-field:focus-within .lg-label i { transform: scale(1.25) rotate(-8deg); }
+
+    .lg-input { position: relative; }
+    .lg-input::after {
+        content: "";
+        position: absolute; left: 14px; right: 14px; bottom: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--lg-accent), var(--lg-violet), var(--lg-pink));
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .4s var(--lg-ease);
+        pointer-events: none;
+    }
+    .lg-field:focus-within .lg-input::after { transform: scaleX(1); }
+
+    .lg-form .form-control {
+        width: 100%;
+        background-color: rgba(255,255,255,.92);
+        border: 1.5px solid #e1e5f2;
+        border-radius: 14px;
+        padding: .75rem 1rem;
+        font-size: .93rem;
+        color: var(--lg-text);
+        transition: all .25s var(--lg-ease);
+    }
+    .lg-form .form-control::placeholder { color: #a3acc2; }
+    .lg-form .form-control:hover { border-color: #c1c9f5; }
+    .lg-form .form-control:focus {
+        outline: 0;
+        background-color: #fff;
+        border-color: var(--lg-accent);
+        box-shadow: 0 0 0 4px rgba(99,102,241,.14), 0 14px 24px -16px rgba(99,102,241,.7);
         transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+    }
+    .lg-password .form-control { padding-right: 2.8rem; }
+
+    .lg-eye {
+        position: absolute; right: 8px; top: 50%;
+        transform: translateY(-50%);
+        width: 34px; height: 34px;
+        border: 0; border-radius: 10px;
+        background: transparent;
+        color: #94a3b8;
+        display: flex; align-items: center; justify-content: center;
+        z-index: 3;
+        transition: color .2s, background .2s, transform .25s var(--lg-ease);
+    }
+    .lg-eye:hover { color: var(--lg-accent-dark); background: rgba(99,102,241,.1); }
+    .lg-eye:active { transform: translateY(-50%) scale(.9); }
+
+    /* Caps lock hint */
+    .lg-caps {
+        display: none;
+        margin-left: auto;
+        align-items: center; gap: .3rem;
+        font-size: .7rem; font-weight: 700;
+        color: #d97706;
+    }
+    .lg-caps i { color: #d97706; }
+    .lg-caps.is-on { display: inline-flex; animation: lg-fade-up .3s var(--lg-ease); }
+
+    /* ---------- Button ---------- */
+    .lg-btn {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        border: 0;
+        border-radius: 16px;
+        padding: .9rem 1.5rem;
+        margin-top: .5rem;
+        font-weight: 700;
+        font-size: 1rem;
+        color: #fff;
+        background: linear-gradient(135deg, var(--lg-accent), var(--lg-violet), var(--lg-pink));
+        background-size: 200% 200%;
+        box-shadow: 0 16px 30px -12px rgba(99,102,241,.9);
+        opacity: 0;
+        animation: lg-fade-up .65s var(--lg-ease) forwards;
+        animation-delay: calc(var(--d) * 100ms + 600ms);
+        transition: transform .25s var(--lg-ease), box-shadow .25s var(--lg-ease), background-position .6s ease;
+    }
+    .lg-btn::after {
+        content: "";
+        position: absolute; top: 0; left: -75%;
+        width: 50%; height: 100%;
+        background: linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent);
+        transform: skewX(-20deg);
+    }
+    .lg-btn:hover {
+        color: #fff;
+        transform: translateY(-3px) scale(1.01);
+        background-position: 100% 50%;
+        box-shadow: 0 24px 38px -14px rgba(99,102,241,.95);
+    }
+    .lg-btn:hover::after { animation: lg-sweep .8s ease; }
+    .lg-btn:active { transform: scale(.98); }
+    .lg-btn-content i { display: inline-block; margin-left: .35rem; transition: transform .35s var(--lg-ease); }
+    .lg-btn:hover .lg-btn-content i { transform: translateX(6px); }
+    .lg-btn-loading { display: none; align-items: center; justify-content: center; gap: .55rem; }
+    .lg-btn.is-loading .lg-btn-content { display: none; }
+    .lg-btn.is-loading .lg-btn-loading { display: inline-flex; }
+    .lg-btn.is-loading { pointer-events: none; opacity: .92; }
+    .lg-spinner {
+        width: 17px; height: 17px;
+        border: 2px solid rgba(255,255,255,.4);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: lg-spin .7s linear infinite;
+    }
+    @keyframes lg-sweep { to { left: 130%; } }
+    @keyframes lg-spin { to { transform: rotate(360deg); } }
+
+    /* Footer link */
+    .lg-foot {
+        text-align: center;
+        font-size: .85rem;
+        color: var(--lg-muted);
+        margin: 1.3rem 0 0;
+        animation: lg-fade-up .6s 1s var(--lg-ease) both;
+    }
+    .lg-foot a {
+        position: relative;
+        font-weight: 700;
+        color: var(--lg-accent-dark);
+        text-decoration: none;
+    }
+    .lg-foot a::after {
+        content: "";
+        position: absolute; left: 0; right: 0; bottom: -2px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--lg-accent), var(--lg-pink));
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform .35s var(--lg-ease);
+    }
+    .lg-foot a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+    /* ---------- Keyframes ---------- */
+    @keyframes lg-rise { from { opacity: 0; transform: translateY(36px) scale(.97); } to { opacity: 1; transform: none; } }
+    @keyframes lg-fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @keyframes lg-pop { 0% { transform: scale(.4) rotate(-20deg); opacity: 0; } 60% { transform: scale(1.12) rotate(4deg); } 100% { transform: none; opacity: 1; } }
+    @keyframes lg-shake {
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-6px); }
+        40% { transform: translateX(6px); }
+        60% { transform: translateX(-4px); }
+        80% { transform: translateX(4px); }
     }
 
-    body {
-        background: #f5f6fa;
+    @media (max-width: 576px) {
+        .lg-card-body { padding: 1.6rem 1.25rem 1.4rem; }
+        .lg-title { font-size: 1.4rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important;
+            animation-delay: 0ms !important;
+            transition-duration: .01ms !important;
+        }
+        .lg-card, .lg-field, .lg-btn { opacity: 1; }
     }
 </style>
+
+<script>
+(function () {
+    var form = document.getElementById('lgForm');
+    var btn = document.getElementById('lgSubmit');
+    var pw = document.getElementById('id_password');
+    var eye = document.getElementById('lgEye');
+    var caps = document.getElementById('lgCaps');
+
+    // Loading state on submit (only when the browser's own validation passes)
+    if (form && btn) {
+        form.addEventListener('submit', function () { btn.classList.add('is-loading'); });
+    }
+
+    // Show / hide password
+    if (pw && eye) {
+        eye.addEventListener('click', function () {
+            var show = pw.type === 'password';
+            pw.type = show ? 'text' : 'password';
+            eye.innerHTML = '<i class="bi ' + (show ? 'bi-eye-slash' : 'bi-eye') + '"></i>';
+        });
+    }
+
+    // Caps Lock warning
+    if (pw && caps) {
+        function check(e) {
+            if (e.getModifierState) caps.classList.toggle('is-on', e.getModifierState('CapsLock'));
+        }
+        pw.addEventListener('keydown', check);
+        pw.addEventListener('keyup', check);
+        pw.addEventListener('blur', function () { caps.classList.remove('is-on'); });
+    }
+})();
+</script>
 
 {% endblock %}
